@@ -1,32 +1,67 @@
+/* Google Fonts 引入 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #ec4899;
+  --text-dark: #1f2937;
+  --bg-light: #f9fafb;
+  --border: #e5e7eb;
+}
+
 body {
-    background-color: #eee7e7;
-    color: #333;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.logo-background {
-    background-image: url('../images/logo.jpeg');
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: 100px;
-    background-color: #fff;
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
 }
 
-.logo-background h1,
-.logo-background h2 {
-    margin-left: 120px;
+/* 导航栏样式 */
+.navbar {
+  background-color: var(--primary) !important;
+}
+.navbar a {
+  color: white !important;
 }
 
+/* 核心内容撑开高度 */
 main {
-    flex: 1;
+  flex: 1;
 }
 
-.material-symbols-outlined {
-    vertical-align: middle;
-    font-size: 20px;
+/* 页脚样式 */
+footer {
+  background-color: var(--text-dark);
+  color: white;
+  padding: 20px 0;
+}
+
+/* 卡片统一特效 */
+.card {
+  border: none;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* 按钮优化 */
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
 }
