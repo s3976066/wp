@@ -1,0 +1,13 @@
+*.DS_Store
+
+# Ignore everything inside assets/images/pets
+a2/assets/images/pets/*
+
+# Except .gitkeep
+!a2/assets/images/pets/.gitkeep
+
+# Ignore everything inside assets/images/pets
+a3/assets/images/pets/*
+
+# Except .gitkeep
+!a3/assets/images/pets/.gitkeep
