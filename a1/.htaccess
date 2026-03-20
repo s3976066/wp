@@ -1,1 +1,12 @@
-Options -Indexes
+# Prevent unauthorized access
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /home/students/s3976066/public_html/a1/.htpasswd
+Require valid-user
+
+# Enable CGI scripts if needed
+# Options +ExecCGI
+
+# Custom error pages
+ErrorDocument 403 "Access denied. Please contact the administrator."
+ErrorDocument 404 "Page not found."

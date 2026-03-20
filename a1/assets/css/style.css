@@ -1,73 +1,282 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
-
 :root {
-  --primary: #6366f1;
+  /* Brand Colors */
+  --primary-color: #6366f1;
   --primary-dark: #4f46e5;
-  --secondary: #ec4899;
+  --primary-light: #818cf8;
+  --secondary-color: #ec4899;
+  --secondary-dark: #db2777;
+
+  /* Accent Colors */
+  --accent-orange: #f59e0b;
+  --accent-green: #10b981;
+  --accent-purple: #8b5cf6;
+
+  /* Neutral Colors */
   --text-dark: #1f2937;
-  --bg-light: #f9fafb;
-  --bg-dark: #1a1a1a;
-  --border: #e5e7eb;
+  --text-light: #6b7280;
+  --background-light: #f9fafb;
+  --background-white: #ffffff;
+  --border-color: #e5e7eb;
 }
 
+/* Global Styles */
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--bg-dark);
   color: var(--text-dark);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background-color: var(--background-light);
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
   font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Navbar Customization */
+.navbar {
+  background-color: var(--text-dark) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
   font-weight: 700;
+  color: var(--primary-light) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* 导航栏 */
-.navbar { background-color: var(--primary) !important; }
-.navbar a { color: white !important; }
-
-/* 页面主体 */
-main { flex: 1; background-color: var(--bg-dark); }
-.text-primary-custom { color: var(--primary-light); }
-.text-secondary-custom { color: var(--secondary); }
-
-/* 轮播图图片 */
-.carousel-img {
-  height: 400px;
-  object-fit: cover;
-  width: 100%;
+.navbar-brand:hover {
+  color: var(--primary-color) !important;
 }
 
-/* 卡片统一特效 */
+.nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-light) !important;
+}
+
+.nav-link.active {
+  color: var(--primary-color) !important;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* Card Styles */
 .card {
-  background-color: #2a2a2a;
-  color: white;
-  border: none;
-  transition: transform 0.2s;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
-.card:hover { transform: translateY(-5px); }
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
 .card-img-top {
   height: 200px;
   object-fit: cover;
 }
-.clickable-img { cursor: pointer; }
 
-/* 表格与表单样式 */
-.table-custom { background-color: white; border-radius: 8px; overflow: hidden; }
-.form-container { background-color: #2a2a2a; color: white; border-radius: 8px; }
-
-/* 按钮优化 */
-.btn-primary-custom { background-color: var(--primary); color: white; border: none; }
-.btn-primary-custom:hover { background-color: var(--primary-dark); color: white; }
-.btn-secondary-custom { background-color: var(--secondary); color: white; border: none; }
-
-/* 页脚 */
-footer {
-  background-color: var(--text-dark);
-  color: white;
-  padding: 20px 0;
-  border-top: 2px solid var(--secondary);
+.card-title {
+  color: var(--text-dark);
+  font-weight: 600;
 }
+
+.card-text {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Gallery Styles */
+.gallery-img {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.gallery-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Filter Buttons */
+.filter-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.filter-btn:hover:not(.active) {
+  background-color: var(--primary-light) !important;
+  color: white !important;
+}
+
+/* Table Styles */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table-dark {
+  background-color: var(--text-dark) !important;
+}
+
+.table th {
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+/* Form Styles */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--text-light);
+  border-color: var(--text-light);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Badge Styles */
+.badge {
+  font-weight: 500;
+  padding: 0.5em 0.75em;
+  border-radius: 6px;
+}
+
+.bg-success {
+  background-color: var(--accent-green) !important;
+}
+
+.bg-warning {
+  background-color: var(--accent-orange) !important;
+}
+
+/* Footer Styles */
+footer {
+  background-color: var(--text-dark) !important;
+}
+
+footer h5 {
+  color: var(--primary-light);
+}
+
+footer p {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+/* Carousel Customization */
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .carousel-item img {
+      height: 250px;
+  }
+
+  .gallery-img {
+      height: 200px;
+  }
+
+  .navbar-brand {
+      font-size: 1.2rem;
+  }
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .gallery-item {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.card:nth-child(1), .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2), .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3), .gallery-item:nth-child(3) { animation-delay: 0.3s; }

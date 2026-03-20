@@ -3,154 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetConnect - Pet Gallery</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>PetConnect - Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="index.html">
-                    <span class="material-icons me-2">pets</span> PetConnect
+                <a class="navbar-brand" href="index.html">
+                    <span class="material-icons">pets</span>
+                    PetConnect
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pets.html">Browse Pets</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="add.html">Add Pet</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pets.html">Pets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="add.html">Add Pet</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="container my-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-secondary-custom">Pet Gallery</h2>
-            <div class="w-25 text-white">
-                <label for="statusFilter" class="form-label small mb-1">Filter by Status:</label>
-                <select id="statusFilter" class="form-select form-select-sm">
-                    <option value="All">Show All</option>
-                    <option value="Available">Available</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Adopted">Adopted</option>
-                </select>
-            </div>
-        </div>
+    <main>
+        <div class="container mt-4">
+            <h2 class="mb-4">Pet Gallery</h2>
 
-        <div class="row g-4">
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/buddy.jpg" class="card-img-top clickable-img" alt="Buddy" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Buddy</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Dog</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$250.00</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/whiskers.jpg" class="card-img-top clickable-img" alt="Whiskers" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Whiskers</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Cat</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$150.00</p>
-                    </div>
-                </div>
+            <!-- Filter Buttons -->
+            <div class="mb-4">
+                <button class="btn btn-primary me-2 filter-btn active" data-filter="all">All Pets</button>
+                <button class="btn btn-outline-primary me-2 filter-btn" data-filter="available">Available</button>
+                <button class="btn btn-outline-primary me-2 filter-btn" data-filter="pending">Pending</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="adopted">Adopted</button>
             </div>
 
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/max.jpg" class="card-img-top clickable-img" alt="Max" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Max</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Dog</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$200.00</p>
-                    </div>
+            <!-- Gallery Grid -->
+            <div class="row" id="galleryGrid">
+                <div class="col-md-4 mb-4 gallery-item" data-status="available">
+                    <img src="assets/images/pets/Buddy.jpg" class="img-fluid gallery-img" alt="Buddy"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Buddy - Available</p>
                 </div>
-            </div>
-
-            <div class="col-md-3 pet-card-wrapper" data-status="Pending">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/luna.jpg" class="card-img-top clickable-img" alt="Luna" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Luna</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Cat</span> <span class="badge btn-secondary-custom">Pending</span></div>
-                        <p class="card-text small">$180.00</p>
-                    </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="available">
+                    <img src="assets/images/pets/Luna.jpg" class="img-fluid gallery-img" alt="Luna"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Luna - Available</p>
                 </div>
-            </div>
-
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/charlie.jpg" class="card-img-top clickable-img" alt="Charlie" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Charlie</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Bird</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$120.00</p>
-                    </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="pending">
+                    <img src="assets/images/pets/Whiskers.jpg" class="img-fluid gallery-img" alt="Whiskers"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Whiskers - Pending</p>
                 </div>
-            </div>
-
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/bella.jpg" class="card-img-top clickable-img" alt="Bella" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Bella</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Dog</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$220.00</p>
-                    </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="available">
+                    <img src="assets/images/pets/Max.jpg" class="img-fluid gallery-img" alt="Max"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Max - Available</p>
                 </div>
-            </div>
-
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/oliver.jpg" class="card-img-top clickable-img" alt="Oliver" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Oliver</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Cat</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$200.00</p>
-                    </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="adopted">
+                    <img src="assets/images/pets/Bella.jpg" class="img-fluid gallery-img" alt="Bella"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Bella - Adopted</p>
                 </div>
-            </div>
-
-            <div class="col-md-3 pet-card-wrapper" data-status="Available">
-                <div class="card shadow-sm h-100">
-                    <img src="assets/images/pets/rocky.jpg" class="card-img-top clickable-img" alt="Rocky" data-bs-toggle="modal" data-bs-target="#imageModal">
-                    <div class="card-body">
-                        <h5 class="card-title">Rocky</h5>
-                        <div class="mb-2"><span class="badge btn-primary-custom">Dog</span> <span class="badge btn-secondary-custom">Available</span></div>
-                        <p class="card-text small">$160.00</p>
-                    </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="available">
+                    <img src="assets/images/pets/Charlie.jpg" class="img-fluid gallery-img" alt="Charlie"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Charlie - Available</p>
+                </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="pending">
+                    <img src="assets/images/pets/Oliver.jpg" class="img-fluid gallery-img" alt="Oliver"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Oliver - Pending</p>
+                </div>
+                <div class="col-md-4 mb-4 gallery-item" data-status="available">
+                    <img src="assets/images/pets/Rocky.jpg" class="img-fluid gallery-img" alt="Rocky"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <p class="mt-2">Rocky - Available</p>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Image Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Pet Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body text-center p-0">
-                    <img id="modalImg" src="" class="img-fluid rounded-bottom w-100">
+                <div class="modal-body text-center">
+                    <img src="" class="img-fluid" id="modalImage" alt="Full size pet image">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2026 Yizhao Zheng (s3976066). Connecting pets with loving homes.</p>
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><span class="material-icons">pets</span> PetConnect</h5>
+                    <p>Connecting pets with loving families since 2024.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2026 Yizhao Zheng. All rights reserved.</p>
+                    <p>COSC2446 Web Programming</p>
+                </div>
+            </div>
         </div>
     </footer>
 
