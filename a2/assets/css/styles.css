@@ -1,0 +1,680 @@
+/* ============================================================
+   PetConnect – styles.css
+   Based on AT1 style.css, extended for AT2 dynamic features.
+   No inline styles used anywhere.
+   Student: Yizhao Zheng | s3976066
+   ============================================================ */
+
+/* ---------- CSS Custom Properties (Brand Colors) ---------- */
+:root {
+    /* Brand Colors */
+    --primary-color:    #6366f1;
+    --primary-dark:     #4f46e5;
+    --primary-light:    #818cf8;
+    --secondary-color:  #ec4899;
+    --secondary-dark:   #db2777;
+
+    /* Accent Colors */
+    --accent-orange:    #f59e0b;
+    --accent-green:     #10b981;
+    --accent-purple:    #8b5cf6;
+
+    /* Neutral Colors */
+    --text-dark:        #1f2937;
+    --text-light:       #6b7280;
+    --background-light: #f9fafb;
+    --background-white: #ffffff;
+    --border-color:     #e5e7eb;
+}
+
+/* ---------- Global Styles ---------- */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* ---------- Navbar ---------- */
+/* AT2: Indigo gradient navbar (matching screenshots) */
+#mainNav {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    padding: 0.6rem 0;
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff !important;
+}
+
+.navbar-brand:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+.nav-brand-icon {
+    font-size: 1.4rem;
+}
+
+.nav-icon {
+    font-size: 1rem;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.nav-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    padding: 0.45rem 0.85rem !important;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    color: rgba(255,255,255,0.88) !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff !important;
+}
+
+/* Add Pet nav button (pink accent) */
+.nav-add {
+    background: var(--secondary-color);
+    color: #fff !important;
+    margin-left: 0.25rem;
+}
+
+.nav-add:hover {
+    background: var(--secondary-dark) !important;
+    color: #fff !important;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    background: linear-gradient(135deg, var(--text-dark) 0%, #374151 100%);
+    color: #d1d5db;
+    font-size: 0.875rem;
+    margin-top: auto;
+}
+
+/* ---------- Carousel ---------- */
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel-caption {
+    background: rgba(99, 102, 241, 0.75);
+    border-radius: 8px;
+    padding: 0.6rem 1.25rem;
+    bottom: 1.5rem;
+}
+
+.carousel-caption h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 1rem;
+    background-size: 60%;
+}
+
+/* ---------- Section Heading (AT2 style) ---------- */
+.section-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.section-heading .material-icons {
+    color: var(--secondary-color);
+}
+
+/* ---------- Pet Cards (Home page grid) ---------- */
+.pet-card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--background-white);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    cursor: pointer;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(99, 102, 241, 0.15);
+}
+
+.pet-card-img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+.pet-card-body {
+    padding: 0.85rem 1rem;
+}
+
+.pet-card-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 0.2rem;
+}
+
+.pet-card-fee {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* ---------- Status Badges ---------- */
+.badge-status {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.badge-available { background-color: var(--accent-green); }
+.badge-pending   { background-color: var(--accent-orange); }
+.badge-adopted   { background-color: var(--text-light); }
+
+.badge-species {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+/* ---------- Pets Page (Browse) ---------- */
+.pets-banner-img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    min-height: 300px;
+    max-height: 480px;
+}
+
+/* Table header */
+.pets-table thead th {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background-color: var(--text-dark);
+    color: #fff;
+    border: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.85rem 1rem;
+}
+
+/* Custom link colour for pet names (pink as shown in AT2 screenshot) */
+.pets-table a {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.pets-table a:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+.pets-table tbody tr:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+.pets-table tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ---------- Gallery Page ---------- */
+.gallery-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+}
+
+.gallery-card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--background-white);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.18);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-card-body {
+    padding: 0.8rem;
+}
+
+.gallery-card-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    color: var(--text-dark);
+}
+
+.gallery-card-fee {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.gap-badges {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.25rem;
+}
+
+/* Status filter dropdown */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.filter-bar label {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0;
+}
+
+.filter-bar select {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    background: var(--background-white);
+}
+
+.filter-bar select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Gallery Modal */
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: #fff;
+    border: none;
+}
+
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+#modalPetImg {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* ---------- Details Page ---------- */
+.detail-pet-img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    max-height: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.detail-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.detail-table td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-table td:first-child {
+    font-weight: 600;
+    color: var(--text-light);
+    width: 38%;
+}
+
+.detail-section-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 1.25rem 0 0.5rem;
+}
+
+.detail-section-label .material-icons {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* ---------- Add Pet Form ---------- */
+.add-pet-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-pet-heading .material-icons {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.form-card {
+    background: var(--background-white);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.07);
+}
+
+.form-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 0.65rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    color: var(--text-dark);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    outline: none;
+}
+
+/* Upload zone */
+.upload-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--background-light);
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+}
+
+.upload-zone:hover {
+    border-color: var(--primary-color);
+    background: #f0f4ff;
+}
+
+/* Image preview */
+#imagePreviewContainer {
+    display: none;
+    margin-top: 1rem;
+}
+
+#imagePreview {
+    max-height: 180px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+/* Validation alerts */
+.alert-valid {
+    color: #065f46;
+    background: #d1fae5;
+    border: 1px solid #6ee7b7;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.5rem;
+}
+
+.alert-invalid {
+    color: #991b1b;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.5rem;
+}
+
+/* Submit / Cancel buttons */
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: #fff;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s, transform 0.15s;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 0.6rem 1.35rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-cancel:hover {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+/* Back button */
+.btn-back {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-back:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Success / Error feedback messages */
+.msg-success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 0.9rem 1.25rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+}
+
+.msg-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 0.9rem 1.25rem;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+}
+
+/* ---------- Card / Animation (carried over from AT1) ---------- */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 767.98px) {
+    .carousel-item img {
+        height: 240px;
+    }
+
+    .pets-banner-img {
+        min-height: 200px;
+        margin-bottom: 1.25rem;
+    }
+
+    .gallery-heading {
+        font-size: 1.4rem;
+    }
+
+    .detail-name {
+        font-size: 1.5rem;
+    }
+
+    .add-pet-heading {
+        font-size: 1.3rem;
+    }
+}
