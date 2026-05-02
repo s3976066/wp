@@ -14,7 +14,7 @@ require_once 'includes/db_connect.inc';
 $success_msg = '';
 $error_msg   = '';
 
-// Preserve form values on error (repopulate fields)
+
 $form = [
     'name'         => '',
     'species'      => '',
