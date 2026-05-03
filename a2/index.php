@@ -17,7 +17,7 @@ require_once 'includes/nav.inc';
 
 <main>
 
-    <!-- ===== Bootstrap Carousel (4 static images from AT1) ===== -->
+   
     <div id="petCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
