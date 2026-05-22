@@ -195,9 +195,13 @@ require_once 'includes/nav.inc';
 
             <!-- 图片上传 -->
             <div class="mb-3">
-                <label for="image" class="form-label">宠物图片</label>
-                <input type="file" name="image" id="image" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp">
-                <div class="form-text text-muted">支持格式：JPG、JPEG、PNG、GIF、WebP</div>
+                <label for="imageInput" class="form-label">宠物图片</label>
+                <input type="file" name="image" id="imageInput" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp">
+                <small id="imageError" class="text-danger d-none"></small>
+                <div id="previewWrapper" class="d-none mt-2">
+                    <p class="text-success">已选择有效图片：<span id="previewMeta"></span></p>
+                    <img id="imagePreview" class="img-thumbnail" style="max-width: 200px;" alt="预览图片">
+                </div>
             </div>
         </div>
     </div>

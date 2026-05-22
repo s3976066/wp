@@ -132,10 +132,32 @@ require_once 'includes/nav.inc';
     <!-- Edit/Delete 按钮（Stage 5 添加所有权检查） -->
     <div class="d-flex gap-2 mt-4">
         <a href="edit.php?id=<?= (int)$pet['pet_id'] ?>" class="btn btn-primary">编辑</a>
-        <form action="process_delete.php" method="post" class="d-inline">
-            <input type="hidden" name="pet_id" value="<?= (int)$pet['pet_id'] ?>">
-            <button type="submit" class="btn btn-secondary">删除</button>
-        </form>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            删除
+        </button>
+    </div>
+
+    <!-- 删除确认模态框（Stage 3 JS 控制） -->
+    <div id="deleteModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">确认删除</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>确定要删除 <strong><?= htmlspecialchars($pet['name']) ?></strong> 吗？</p>
+                    <p class="text-danger">此操作不可撤销，宠物的所有数据和图片将被永久删除。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">取消</button>
+                    <form action="process_delete.php" method="post" class="d-inline">
+                        <input type="hidden" name="pet_id" value="<?= (int)$pet['pet_id'] ?>">
+                        <button type="submit" class="btn btn-danger">确认删除</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 <?php endif; ?>
 
