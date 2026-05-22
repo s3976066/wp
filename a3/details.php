@@ -132,7 +132,7 @@ require_once 'includes/nav.inc';
     <!-- Edit/Delete 按钮（Stage 5 添加所有权检查） -->
     <div class="d-flex gap-2 mt-4">
         <a href="edit.php?id=<?= (int)$pet['pet_id'] ?>" class="btn btn-primary">编辑</a>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <button type="button" id="deleteBtn" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">
             删除
         </button>
     </div>
@@ -151,9 +151,9 @@ require_once 'includes/nav.inc';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">取消</button>
-                    <form action="process_delete.php" method="post" class="d-inline">
+                    <form id="deleteForm" action="process_delete.php" method="post" class="d-inline">
                         <input type="hidden" name="pet_id" value="<?= (int)$pet['pet_id'] ?>">
-                        <button type="submit" class="btn btn-danger">确认删除</button>
+                        <button type="submit" id="confirmDelete" class="btn btn-danger">确认删除</button>
                     </form>
                 </div>
             </div>

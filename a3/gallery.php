@@ -38,6 +38,7 @@ require_once 'includes/nav.inc';
                 <a href="details.php?id=<?= (int)$pet['pet_id'] ?>" class="img-hover gallery-img-link">
                     <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
                          class="card-img-top gallery-img"
+                         data-pet-name="<?= htmlspecialchars($pet['name']) ?>"
                          alt="<?= htmlspecialchars($pet['name']) ?>">
                 </a>
                 <div class="card-body text-center">
@@ -56,7 +57,7 @@ require_once 'includes/nav.inc';
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="galleryModalTitle">图片预览</h5>
+                <h5 class="modal-title" id="galleryModalLabel">图片预览</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
