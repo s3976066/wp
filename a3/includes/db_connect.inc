@@ -1,0 +1,29 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 双环境检测：localhost vs Jacob 5
+$server = $_SERVER['SERVER_NAME'] ?? 'localhost';
+$isProd = (stripos($server, 'rmit.edu.au') !== false) ||
+          (stripos($server, 'jupiter') !== false) ||
+          (stripos($server, 'saturn') !== false) ||
+          (stripos($server, 'titan') !== false);
+
+if ($isProd) {
+    $dbHost = 'talsprddb02.int.its.rmit.edu.au';
+    $dbUser = 's3976066';
+    $dbPass = '<I_WILL_FILL_THIS_IN_BEFORE_DEPLOY>';
+    $dbName = 's3976066';
+} else {
+    $dbHost = 'localhost';
+    $dbUser = 'root';
+    $dbPass = '';
+    $dbName = 'petconnect';
+}
+
+$conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+if (!$conn) {
+    die('Database connection failed: ' . mysqli_connect_error());
+}
+mysqli_set_charset($conn, 'utf8mb4');

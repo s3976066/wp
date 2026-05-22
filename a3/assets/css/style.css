@@ -1,0 +1,221 @@
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+/* ===== CSS Variables ===== */
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --secondary: #ec4899;
+    --secondary-dark: #db2777;
+    --accent-orange: #f59e0b;
+    --accent-green: #10b981;
+    --accent-purple: #8b5cf6;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-hover: #334155;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+
+/* ===== Base ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand,
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--secondary);
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-brand .material-icons {
+    font-size: 1.6rem;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar .nav-link:hover {
+    color: #fff;
+}
+
+.navbar .nav-link .material-icons {
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
+
+/* ===== Cards ===== */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+}
+
+.card-title {
+    color: var(--text);
+}
+
+.card-text {
+    color: var(--text-muted);
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    border: none;
+    font-weight: 500;
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+    margin-top: auto;
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark), var(--accent-orange));
+    background-size: 200% 200%;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+/* ===== Flash Messages ===== */
+.alert {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* ===== Modal ===== */
+.modal-content {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+/* ===== Forms ===== */
+.form-control,
+.form-select {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--bg-dark);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+    color: var(--text);
+}
+
+.form-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ===== Badges ===== */
+.badge-available {
+    background-color: var(--accent-green);
+    color: #fff;
+}
+
+.badge-pending {
+    background-color: var(--accent-orange);
+    color: #000;
+}
+
+.badge-adopted {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+/* ===== Image Hover ===== */
+.img-hover {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.img-hover:hover {
+    opacity: 0.85;
+}

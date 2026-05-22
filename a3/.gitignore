@@ -1,0 +1,5 @@
+assets/images/pets/*
+!assets/images/pets/.gitkeep
+/vendor/
+.DS_Store
+*.log
