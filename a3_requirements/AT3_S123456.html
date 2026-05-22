@@ -1,0 +1,2452 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetConnect Assessment 3 Results - S123456</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .summary-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .summary-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .grade-card .value {
+            color: #10b981;
+        }
+
+        .grade-card.HD .value { color: #10b981; }
+        .grade-card.DI .value { color: #3b82f6; }
+        .grade-card.CR .value { color: #f59e0b; }
+        .grade-card.PA .value { color: #ef4444; }
+        .grade-card.NN .value { color: #dc2626; }
+
+        .content {
+            padding: 40px;
+        }
+
+        .stage {
+            margin-bottom: 40px;
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stage-title {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .stage-score {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .test-list {
+            list-style: none;
+        }
+
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-left: 4px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .test-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .test-item.passed {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .test-item.failed {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .test-item.partial {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .test-info {
+            flex: 1;
+        }
+
+        .test-title {
+            font-weight: 500;
+        }
+
+        .test-feedback {
+            font-size: 0.85em;
+            color: #dc2626;
+            margin-top: 5px;
+            font-style: italic;
+            padding-left: 10px;
+        }
+
+        .test-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .test-status.passed {
+            background: #10b981;
+            color: white;
+        }
+
+        .test-status.failed {
+            background: #ef4444;
+            color: white;
+        }
+
+        .test-status.partial {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .test-score-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .test-score-edit input[type="number"] {
+            width: 60px;
+            padding: 4px 8px;
+            border: 2px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.9em;
+            text-align: center;
+            transition: border-color 0.3s;
+            font-weight: 600;
+        }
+
+        .test-score-edit input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .test-score-edit input[type="number"]:read-only {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        .test-score-edit .max-points {
+            color: #666;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .test-notes {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .test-notes textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 50px;
+            transition: border-color 0.3s;
+        }
+
+        .test-notes textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .test-notes textarea:read-only {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        .test-notes label {
+            display: block;
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        .manual-grading {
+            background: #fff3cd;
+            padding: 30px 40px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px dashed #ffc107;
+        }
+
+        .manual-grading h2 {
+            color: #856404;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .manual-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .manual-section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .manual-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .manual-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .manual-item.passed {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .manual-item.failed {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .manual-item.partial {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .manual-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .manual-status.passed {
+            background: #10b981;
+            color: white;
+        }
+
+        .manual-status.failed {
+            background: #ef4444;
+            color: white;
+        }
+
+        .manual-status.partial {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .manual-item label {
+            flex: 1;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .manual-item .max-points {
+            margin-right: 15px;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .manual-item input[type="number"] {
+            width: 80px;
+            padding: 8px;
+            border: 2px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1em;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .manual-item input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .manual-item input[type="number"]:read-only {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        .manual-item-notes {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .manual-item-notes textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 50px;
+            transition: border-color 0.3s;
+        }
+
+        .manual-item-notes textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .manual-item-notes textarea:read-only {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        .manual-item-notes label {
+            display: block;
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .manual-totals {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .manual-totals h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 1.1em;
+        }
+
+        .total-row.grand-total {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .total-row label {
+            font-weight: 600;
+        }
+
+        .total-row .score {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .total-row.grand-total .score {
+            color: white;
+        }
+
+        .instructions {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .instructions p {
+            color: #004085;
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .lock-button {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .lock-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .lock-button.locked {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            cursor: not-allowed;
+        }
+
+        .manual-grading.locked {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .manual-grading.locked h2 {
+            color: #155724;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .manual-grading {
+                border: 2px solid #ffc107;
+                page-break-inside: avoid;
+            }
+
+            .instructions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>COSC2446 Assessment 3</h1>
+            <div class="subtitle">Test Results for S123456</div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <h3>Tests Passed</h3>
+                <div class="value">56/56</div>
+            </div>
+            <div class="summary-card">
+                <h3>Total Score</h3>
+                <div class="value">100.0/100</div>
+                <div style="font-size: 0.8em; color: #666; margin-top: 5px;">Automated + Manual</div>
+            </div>
+            <div class="summary-card grade-card HD">
+                <h3>Grade</h3>
+                <div class="value">HD</div>
+                <div style="font-size: 0.9em; color: #666; margin-top: 5px;">100.00%</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Lock Grades Button at Top -->
+            <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgb(255, 243, 205); border-radius: 8px; border: 2px dashed rgb(255, 193, 7); display: none;">
+                <p style="margin-bottom: 15px; color: #856404; font-weight: 600;">
+                    <strong>Instructor:</strong> Review all grades and comments below. When finished, click the button to lock grades and download the final report.
+                </p>
+                <button class="lock-button" id="lockButton" onclick="lockGrades()">🔒 Lock Grades &amp; Download Report</button>
+                <div id="locked-notice-top" style="display: block; background: rgb(40, 167, 69); color: white; padding: 15px; border-radius: 6px; margin-top: 15px; font-weight: 600;">
+                    ✅ Grades have been locked! This report is final and read-only.
+                </div>
+            </div><div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgb(212, 237, 218); border-radius: 8px; border: 2px solid rgb(40, 167, 69);"><div style="background: #28a745; color: white; padding: 15px; border-radius: 6px; font-weight: 600;">✅ Grades have been locked! This report is final and read-only.</div></div>
+
+            
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-title">Stage 1: PHP Structure</div>
+                    <div class="stage-score">20.0/20 points</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <ul class="test-list">
+                    
+                    <li class="test-item passed" id="item-test-stage1-0">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Main pages exist</div>
+                                    <div class="test-feedback">➤ Main pages: All required files exist (index.php, pets.php, gallery.php, details.php, owner.php, add.php, edit.php)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-0" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-0');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-0">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-0">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-0" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-1">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Authentication pages exist</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-1" class="auto-test-score" data-stage="stage1" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage1-1');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-1">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-1">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-1" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-2">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">CRUD pages exist and delete functionality</div>
+                                    <div class="test-feedback">➤ CRUD pages: All required files (add.php, edit.php) and delete functionality exist</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-2" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-2');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-2">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-2">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-2" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-3">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Required include files exist</div>
+                                    <div class="test-feedback">➤ Include files: All required include files exist (includes/header.inc, includes/footer.inc, includes/nav.inc)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-3" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-3');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-3">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-3">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-3" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-4">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Semantic HTML5 tags used (header, nav, main, footer)</div>
+                                    <div class="test-feedback">➤ Semantic HTML: All required semantic tags found</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-4" class="auto-test-score" data-stage="stage1" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage1-4');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-4">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-4">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-4" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-5">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">index.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ index.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-5" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-5');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-5">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-5">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-5" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-6">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">pets.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ pets.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-6" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-6');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-6">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-6">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-6" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-7">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">gallery.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ gallery.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-7" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-7');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-7">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-7">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-7" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-8">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">add.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ add.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-8" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-8');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-8">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-8">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-8" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-9">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">details.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ details.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-9" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-9');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-9">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-9">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-9" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-10">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">owner.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ owner.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-10" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-10');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-10">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-10">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-10" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-11">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">search.php renders valid HTML</div>
+                                    <div class="test-feedback">➤ search.php validation: Valid HTML</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-11" class="auto-test-score" data-stage="stage1" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage1-11');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-11">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-11">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-11" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-12">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">register.php renders valid HTML</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-12" class="auto-test-score" data-stage="stage1" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage1-12');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-12">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-12">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-12" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage1-13">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">login.php renders valid HTML</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage1-13" class="auto-test-score" data-stage="stage1" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage1-13');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage1-13">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage1-13">Notes/Comments:</label>
+                                <textarea id="notes-test-stage1-13" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-title">Stage 2: Database Structure</div>
+                    <div class="stage-score">15.0/15 points</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <ul class="test-list">
+                    
+                    <li class="test-item passed" id="item-test-stage2-0">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">db_connect.inc file contains MySQLi connection code with correct structure</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage2-0" class="auto-test-score" data-stage="stage2" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage2-0');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage2-0">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage2-0">Notes/Comments:</label>
+                                <textarea id="notes-test-stage2-0" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage2-1">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Registration inserts user with correct fields</div>
+                                    <div class="test-feedback">➤ Registration functionality: User created with correct fields</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage2-1" class="auto-test-score" data-stage="stage2" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateTestStatus('test-stage2-1');" readonly="readonly">
+                                        <span class="max-points">/ 3 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage2-1">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage2-1">Notes/Comments:</label>
+                                <textarea id="notes-test-stage2-1" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage2-2">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Add record inserts record with correct fields</div>
+                                    <div class="test-feedback">➤ Add record functionality: Record created (name, species, gender, size, description, user_id linked)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage2-2" class="auto-test-score" data-stage="stage2" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateTestStatus('test-stage2-2');" readonly="readonly">
+                                        <span class="max-points">/ 3 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage2-2">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage2-2">Notes/Comments:</label>
+                                <textarea id="notes-test-stage2-2" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage2-3">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Edit record updates correct fields</div>
+                                    <div class="test-feedback">➤ Edit record functionality: Fields updated (name, species, size, description)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage2-3" class="auto-test-score" data-stage="stage2" data-max="4" min="0" max="4" step="0.25" value="4" oninput="updateAllTotals(); updateTestStatus('test-stage2-3');" readonly="readonly">
+                                        <span class="max-points">/ 4 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage2-3">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage2-3">Notes/Comments:</label>
+                                <textarea id="notes-test-stage2-3" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage2-4">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">details.php has link to owner.php and owner.php displays correct data</div>
+                                    <div class="test-feedback">➤ owner.php link test: Full functionality working (owner link found on details page; pet displayed on owner page; username displayed on owner page; cards used for display)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage2-4" class="auto-test-score" data-stage="stage2" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateTestStatus('test-stage2-4');" readonly="readonly">
+                                        <span class="max-points">/ 3 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage2-4">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage2-4">Notes/Comments:</label>
+                                <textarea id="notes-test-stage2-4" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-title">Stage 3: JavaScript &amp; Responsive Design</div>
+                    <div class="stage-score">10.0/10 points</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <ul class="test-list">
+                    
+                    <li class="test-item passed" id="item-test-stage3-0">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">File extension validation exists in JavaScript</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-0" class="auto-test-score" data-stage="stage3" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage3-0');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-0">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-0">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-0" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-1">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Bootstrap modal exists in gallery page</div>
+                                    <div class="test-feedback">➤ Gallery modal structure: Modal found</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-1" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-1');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-1">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-1">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-1" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-2">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Gallery images are clickable and trigger modal</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-2" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-2');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-2">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-2">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-2" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-3">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Modal closes correctly</div>
+                                    <div class="test-feedback">➤ Modal close: Successfully closes with button</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-3" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-3');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-3">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-3">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-3" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-4">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Delete confirmation modal on details.php</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-4" class="auto-test-score" data-stage="stage3" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage3-4');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-4">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-4">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-4" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-5">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Bootstrap grid system is used</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-5" class="auto-test-score" data-stage="stage3" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage3-5');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-5">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-5">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-5" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-6">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Mobile viewport works correctly</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-6" class="auto-test-score" data-stage="stage3" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage3-6');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-6">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-6">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-6" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-7">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Tablet viewport works correctly</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-7" class="auto-test-score" data-stage="stage3" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage3-7');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-7">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-7">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-7" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-8">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Desktop viewport works correctly</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-8" class="auto-test-score" data-stage="stage3" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage3-8');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-8">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-8">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-8" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-9">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Filter by "Available" shows correct records</div>
+                                    <div class="test-feedback">➤ Filter Available: Shows correct records</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-9" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-9');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-9">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-9">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-9" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-10">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Filter by "Pending" shows correct records</div>
+                                    <div class="test-feedback">➤ Filter Pending: Shows correct records</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-10" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-10');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-10">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-10">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-10" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-11">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Filter by "Adopted" shows correct records</div>
+                                    <div class="test-feedback">➤ Filter Adopted: Shows correct records</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-11" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-11');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-11">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-11">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-11" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-12">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">"Show All" resets filter</div>
+                                    <div class="test-feedback">➤ Filter Show All: Resets filter correctly</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-12" class="auto-test-score" data-stage="stage3" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateTestStatus('test-stage3-12');" readonly="readonly">
+                                        <span class="max-points">/ 0.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-12">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-12">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-12" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-13">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Image preview functionality exists</div>
+                                    <div class="test-feedback">➤ Image preview: Found (custom JavaScript file loaded (assets/js/scripts.js))</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-13" class="auto-test-score" data-stage="stage3" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage3-13');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-13">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-13">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-13" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-14">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">JavaScript loads without errors (0 points if clean, -1 penalty if fails)</div>
+                                    <div class="test-feedback">➤ JavaScript loads without errors</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-14" class="auto-test-score" data-stage="stage3" data-max="0" min="-10" max="0" step="0.25" value="0" oninput="updateAllTotals(); updateTestStatus('test-stage3-14');" readonly="readonly">
+                                        <span class="max-points">/ 0 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-14">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-14">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-14" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-15">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">All JavaScript in single file scripts.js (0 points if clean, -1 penalty if fails)</div>
+                                    <div class="test-feedback">➤ All JavaScript in single file scripts.js</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-15" class="auto-test-score" data-stage="stage3" data-max="0" min="-10" max="0" step="0.25" value="0" oninput="updateAllTotals(); updateTestStatus('test-stage3-15');" readonly="readonly">
+                                        <span class="max-points">/ 0 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-15">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-15">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-15" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage3-16">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">No inline JavaScript event handlers used (0 points if clean, -2 penalty if found)</div>
+                                    <div class="test-feedback">➤ No inline JavaScript found</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage3-16" class="auto-test-score" data-stage="stage3" data-max="0" min="-10" max="0" step="0.25" value="0" oninput="updateAllTotals(); updateTestStatus('test-stage3-16');" readonly="readonly">
+                                        <span class="max-points">/ 0 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage3-16">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage3-16">Notes/Comments:</label>
+                                <textarea id="notes-test-stage3-16" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-title">Stage 4: Authentication &amp; Sessions</div>
+                    <div class="stage-score">10.0/10 points</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <ul class="test-list">
+                    
+                    <li class="test-item passed" id="item-test-stage4-0">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Registration form processes and creates user account</div>
+                                    <div class="test-feedback">➤ Registration processing: User account created successfully</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-0" class="auto-test-score" data-stage="stage4" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage4-0');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-0">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-0">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-0" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-1">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Password is encrypted using password_hash</div>
+                                    <div class="test-feedback">➤ Password encryption: password_hash() used correctly</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-1" class="auto-test-score" data-stage="stage4" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage4-1');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-1">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-1">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-1" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-2">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Login page has required form fields</div>
+                                    <div class="test-feedback">➤ Login form: All required fields present</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-2" class="auto-test-score" data-stage="stage4" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage4-2');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-2">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-2">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-2" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-3">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Login creates session</div>
+                                    <div class="test-feedback">➤ Login session: Session created successfully (indicators: username displayed, logout button, welcome message, left login page)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-3" class="auto-test-score" data-stage="stage4" data-max="1.25" min="0" max="1.25" step="0.25" value="1.25" oninput="updateAllTotals(); updateTestStatus('test-stage4-3');" readonly="readonly">
+                                        <span class="max-points">/ 1.25 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-3">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-3">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-3" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-4">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Login uses password_verify for authentication</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-4" class="auto-test-score" data-stage="stage4" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage4-4');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-4">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-4">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-4" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-5">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Navbar shows different content for logged-in vs logged-out users</div>
+                                    <div class="test-feedback">➤ Navbar state: Dynamic navigation works correctly (login/register shown when logged out; no logged-in elements when logged out; login/register hidden when logged in; logged-in elements shown when logged in)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-5" class="auto-test-score" data-stage="stage4" data-max="1.25" min="0" max="1.25" step="0.25" value="1.25" oninput="updateAllTotals(); updateTestStatus('test-stage4-5');" readonly="readonly">
+                                        <span class="max-points">/ 1.25 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-5">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-5">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-5" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-6">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Logout functionality destroys session</div>
+                                    <div class="test-feedback">➤ Logout functionality: Session destroyed and redirects correctly</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-6" class="auto-test-score" data-stage="stage4" data-max="1.25" min="0" max="1.25" step="0.25" value="1.25" oninput="updateAllTotals(); updateTestStatus('test-stage4-6');" readonly="readonly">
+                                        <span class="max-points">/ 1.25 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-6">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-6">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-6" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-7">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Flash messages use $_SESSION</div>
+                                    <div class="test-feedback">➤ Flash messages: $_SESSION used for flash messages</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-7" class="auto-test-score" data-stage="stage4" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage4-7');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-7">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-7">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-7" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage4-8">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Flash messages are displayed and cleared</div>
+                                    <div class="test-feedback">➤ Flash messages: Messages displayed and cleared (error message displayed, message cleared on reload)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage4-8" class="auto-test-score" data-stage="stage4" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage4-8');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage4-8">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage4-8">Notes/Comments:</label>
+                                <textarea id="notes-test-stage4-8" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-title">Stage 5: Authorization &amp; Protected Routes</div>
+                    <div class="stage-score">15.0/15 points</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <ul class="test-list">
+                    
+                    <li class="test-item passed" id="item-test-stage5-0">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">add.php requires login (redirects if not logged in)</div>
+                                    <div class="test-feedback">➤ add.php protection: Requires login (redirects or shows access denied)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-0" class="auto-test-score" data-stage="stage5" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage5-0');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-0">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-0">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-0" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-1">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">add.php has session check in code</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-1" class="auto-test-score" data-stage="stage5" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage5-1');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-1">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-1">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-1" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-2">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Edit functionality verifies record owner</div>
+                                    <div class="test-feedback">➤ Edit owner verification: Owner verification implemented (found in: edit.php, processing script, SQL query with user_id)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-2" class="auto-test-score" data-stage="stage5" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage5-2');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-2">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-2">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-2" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-3">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">edit.php uses prepared statements</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-3" class="auto-test-score" data-stage="stage5" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage5-3');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-3">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-3">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-3" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-4">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Edit functionality removes old image file when uploading new one</div>
+                                    <div class="test-feedback">➤ Edit image cleanup: Old image deletion implemented</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-4" class="auto-test-score" data-stage="stage5" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage5-4');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-4">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-4">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-4" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-5">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Edit/Delete buttons only show for owner on details.php</div>
+                                    <div class="test-feedback">➤ details.php owner buttons: Edit/Delete buttons conditional on ownership</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-5" class="auto-test-score" data-stage="stage5" data-max="0.75" min="0" max="0.75" step="0.25" value="0.75" oninput="updateAllTotals(); updateTestStatus('test-stage5-5');" readonly="readonly">
+                                        <span class="max-points">/ 0.75 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-5">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-5">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-5" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-6">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Delete functionality verifies record owner</div>
+                                    <div class="test-feedback">➤ Delete owner verification: Owner verification implemented (found in: process_delete.php)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-6" class="auto-test-score" data-stage="stage5" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage5-6');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-6">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-6">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-6" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-7">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Delete functionality removes associated image file</div>
+                                    <div class="test-feedback">➤ Delete image cleanup: Image file deletion implemented (found in: process_delete.php)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-7" class="auto-test-score" data-stage="stage5" data-max="1.5" min="0" max="1.5" step="0.25" value="1.5" oninput="updateAllTotals(); updateTestStatus('test-stage5-7');" readonly="readonly">
+                                        <span class="max-points">/ 1.5 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-7">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-7">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-7" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-8">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">Delete functionality uses prepared statements</div>
+                                    <div class="test-feedback">➤ Delete prepared statements: Prepared statements used (found in: process_delete.php)</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-8" class="auto-test-score" data-stage="stage5" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage5-8');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-8">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-8">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-8" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-9">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">owner.php filters records by user ID</div>
+                                    <div class="test-feedback">➤ owner.php filtering: Correctly filters records by user ID with prepared statements</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-9" class="auto-test-score" data-stage="stage5" data-max="2" min="0" max="2" step="0.25" value="2" oninput="updateAllTotals(); updateTestStatus('test-stage5-9');" readonly="readonly">
+                                        <span class="max-points">/ 2 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-9">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-9">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-9" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="test-item passed" id="item-test-stage5-10">
+                        <div style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="test-info">
+                                    <div class="test-title">owner.php displays records in card format</div>
+                                    
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="test-score-edit">
+                                        <input type="number" id="test-stage5-10" class="auto-test-score" data-stage="stage5" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateTestStatus('test-stage5-10');" readonly="readonly">
+                                        <span class="max-points">/ 1 pts</span>
+                                    </div>
+                                    <span class="test-status passed" id="status-test-stage5-10">✓ Passed</span>
+                                </div>
+                            </div>
+                            <div class="test-notes" style="display: none;">
+                                <label for="notes-test-stage5-10">Notes/Comments:</label>
+                                <textarea id="notes-test-stage5-10" class="test-notes-field" placeholder="Add notes or comments about this test..." readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+
+        <!-- Manual Grading Section -->
+        <div class="manual-grading locked" id="manualGrading">
+            <h2>📝 Manual Grading Section</h2>
+
+            <div class="instructions">
+                <p><strong>Instructions for Instructor:</strong> Fill in the points earned for each criterion below. The totals will calculate automatically.</p>
+            </div>
+
+            <!-- Page Compliance -->
+            <div class="manual-section">
+                <h3>Page Compliance with Instructions (10 points)</h3>
+                <div class="manual-item passed" id="item-page-index">
+                    <div class="manual-item-header">
+                        <label for="page-index">index.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-index" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-index')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-index">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-index">Notes/Comments:</label>
+                        <textarea id="notes-page-index" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-pets">
+                    <div class="manual-item-header">
+                        <label for="page-pets">pets.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-pets" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-pets')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-pets">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-pets">Notes/Comments:</label>
+                        <textarea id="notes-page-pets" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-gallery">
+                    <div class="manual-item-header">
+                        <label for="page-gallery">gallery.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-gallery" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-gallery')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-gallery">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-gallery">Notes/Comments:</label>
+                        <textarea id="notes-page-gallery" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-add">
+                    <div class="manual-item-header">
+                        <label for="page-add">add.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-add" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-add')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-add">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-add">Notes/Comments:</label>
+                        <textarea id="notes-page-add" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-details">
+                    <div class="manual-item-header">
+                        <label for="page-details">details.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-details" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-details')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-details">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-details">Notes/Comments:</label>
+                        <textarea id="notes-page-details" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-owner">
+                    <div class="manual-item-header">
+                        <label for="page-owner">owner.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-owner" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-owner')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-owner">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-owner">Notes/Comments:</label>
+                        <textarea id="notes-page-owner" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-edit">
+                    <div class="manual-item-header">
+                        <label for="page-edit">edit.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-edit" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-edit')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-edit">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-edit">Notes/Comments:</label>
+                        <textarea id="notes-page-edit" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-search">
+                    <div class="manual-item-header">
+                        <label for="page-search">search.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-search" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-search')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-search">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-search">Notes/Comments:</label>
+                        <textarea id="notes-page-search" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-register">
+                    <div class="manual-item-header">
+                        <label for="page-register">register.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-register" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-register')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-register">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-register">Notes/Comments:</label>
+                        <textarea id="notes-page-register" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-page-login">
+                    <div class="manual-item-header">
+                        <label for="page-login">login.php matches provided screenshot</label>
+                        <span class="max-points">/ 1 points</span>
+                        <input type="number" id="page-login" class="manual-score" data-max="1" min="0" max="1" step="0.25" value="1" oninput="updateAllTotals(); updateManualStatus('page-login')" readonly="readonly">
+                        <span class="manual-status passed" id="status-page-login">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-page-login">Notes/Comments:</label>
+                        <textarea id="notes-page-login" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Site Deployment -->
+            <div class="manual-section">
+                <h3>Site Deployment (10 points)</h3>
+                <div class="manual-item passed" id="item-deploy-site">
+                    <div class="manual-item-header">
+                        <label for="deploy-site">The site is deployed to Coreteaching, data to Jacob5</label>
+                        <span class="max-points">/ 6.5 points</span>
+                        <input type="number" id="deploy-site" class="manual-score" data-max="6.5" min="0" max="6.5" step="0.25" value="6.5" oninput="updateAllTotals(); updateManualStatus('deploy-site')" readonly="readonly">
+                        <span class="manual-status passed" id="status-deploy-site">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-deploy-site">Notes/Comments:</label>
+                        <textarea id="notes-deploy-site" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-deploy-readme">
+                    <div class="manual-item-header">
+                        <label for="deploy-readme">The URL provided in the README.md file</label>
+                        <span class="max-points">/ 0.5 points</span>
+                        <input type="number" id="deploy-readme" class="manual-score" data-max="0.5" min="0" max="0.5" step="0.25" value="0.5" oninput="updateAllTotals(); updateManualStatus('deploy-readme')" readonly="readonly">
+                        <span class="manual-status passed" id="status-deploy-readme">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-deploy-readme">Notes/Comments:</label>
+                        <textarea id="notes-deploy-readme" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-deploy-images">
+                    <div class="manual-item-header">
+                        <label for="deploy-images">Images displayed properly</label>
+                        <span class="max-points">/ 3 points</span>
+                        <input type="number" id="deploy-images" class="manual-score" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateManualStatus('deploy-images')" readonly="readonly">
+                        <span class="manual-status passed" id="status-deploy-images">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-deploy-images">Notes/Comments:</label>
+                        <textarea id="notes-deploy-images" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub and Project History -->
+            <div class="manual-section">
+                <h3>GitHub and Project History (10 points)</h3>
+                <div class="manual-item passed" id="item-git-vcs">
+                    <div class="manual-item-header">
+                        <label for="git-vcs">The code is under version control</label>
+                        <span class="max-points">/ 3 points</span>
+                        <input type="number" id="git-vcs" class="manual-score" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateManualStatus('git-vcs')" readonly="readonly">
+                        <span class="manual-status passed" id="status-git-vcs">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-git-vcs">Notes/Comments:</label>
+                        <textarea id="notes-git-vcs" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-git-commits">
+                    <div class="manual-item-header">
+                        <label for="git-commits">Multiple commits on at least 5 separate days</label>
+                        <span class="max-points">/ 3 points</span>
+                        <input type="number" id="git-commits" class="manual-score" data-max="3" min="0" max="3" step="0.25" value="3" oninput="updateAllTotals(); updateManualStatus('git-commits')" readonly="readonly">
+                        <span class="manual-status passed" id="status-git-commits">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-git-commits">Notes/Comments:</label>
+                        <textarea id="notes-git-commits" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="manual-item passed" id="item-git-messages">
+                    <div class="manual-item-header">
+                        <label for="git-messages">Meaningful commit messages</label>
+                        <span class="max-points">/ 4 points</span>
+                        <input type="number" id="git-messages" class="manual-score" data-max="4" min="0" max="4" step="0.25" value="4" oninput="updateAllTotals(); updateManualStatus('git-messages')" readonly="readonly">
+                        <span class="manual-status passed" id="status-git-messages">✓ Passed</span>
+                    </div>
+                    <div class="manual-item-notes" style="display: none;">
+                        <label for="notes-git-messages">Notes/Comments:</label>
+                        <textarea id="notes-git-messages" class="manual-notes-field" placeholder="Add notes or comments..." readonly="readonly"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="manual-totals">
+                <h3>Summary</h3>
+                <div class="total-row">
+                    <label>Automated Tests (Stages 1-3):</label>
+                    <span class="score" id="automated-score">70.0 / 70</span>
+                </div>
+                <div class="total-row">
+                    <label>Manual Grading:</label>
+                    <span class="score" id="manual-total">30.0 / 30</span>
+                </div>
+                <div class="total-row grand-total">
+                    <label>FINAL TOTAL:</label>
+                    <span class="score" id="final-total">100.0 / 100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Generated on 1/13/2026, 8:04:29 PM</p>
+            <p>PetConnect Assessment 3 Autograder v1.0</p>
+        </div>
+    </div>
+
+    <script>
+        // Scoring constants (keep in sync with server-side values)
+        const STAGE_MAX = {"stage1":20,"stage2":15,"stage3":10,"stage4":10,"stage5":15};
+        const MANUAL_MAX = { total: 30 };
+
+        // Lock grades to prevent student editing
+        function lockGrades() {
+            if (confirm('Are you sure you want to lock these grades? This will make them read-only and cannot be undone without editing the HTML source code.')) {
+                // Save current values
+                document.querySelectorAll('.manual-score, .auto-test-score').forEach(input => {
+                    input.setAttribute('value', input.value);
+                    input.setAttribute('readonly', 'readonly');
+                });
+
+                // Lock all notes/comments fields and hide empty ones
+                document.querySelectorAll('.test-notes-field, .manual-notes-field').forEach(textarea => {
+                    textarea.textContent = textarea.value;
+                    textarea.setAttribute('readonly', 'readonly');
+
+                    if (!textarea.value || textarea.value.trim() === '') {
+                        const notesContainer = textarea.closest('.test-notes, .manual-item-notes');
+                        if (notesContainer) {
+                            notesContainer.style.display = 'none';
+                        }
+                    }
+                });
+
+                // Hide the lock button area and show locked notice
+                const lockButton = document.getElementById('lockButton');
+                if (lockButton && lockButton.parentElement) {
+                    lockButton.parentElement.style.display = 'none';
+                }
+
+                const lockedNoticeTop = document.getElementById('locked-notice-top');
+                if (lockedNoticeTop) {
+                    lockedNoticeTop.style.display = 'block';
+                    const noticeContainer = document.createElement('div');
+                    noticeContainer.style.cssText = 'text-align: center; margin-bottom: 30px; padding: 20px; background: #d4edda; border-radius: 8px; border: 2px solid #28a745;';
+                    noticeContainer.innerHTML = '<div style="background: #28a745; color: white; padding: 15px; border-radius: 6px; font-weight: 600;">✅ Grades have been locked! This report is final and read-only.</div>';
+                    lockButton.parentElement.parentElement.insertBefore(noticeContainer, lockButton.parentElement.nextSibling);
+                }
+
+                document.getElementById('manualGrading').classList.add('locked');
+
+                // Download
+                const htmlContent = document.documentElement.outerHTML;
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+
+                const subtitleElement = document.querySelector('.header .subtitle');
+                let studentName = 'Student';
+                if (subtitleElement) {
+                    const match = subtitleElement.textContent.match(/Test Results for (.+)$/);
+                    if (match) {
+                        studentName = match[1].trim();
+                    }
+                }
+                a.href = url;
+                a.download = 'AT3_' + studentName + '.html';
+
+                if (confirm('Grades have been locked! Click OK to download the locked version, or Cancel to manually save this page (Ctrl/Cmd+S).')) {
+                    a.click();
+                }
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        // Calculate automated test scores by stage
+        function calculateAutomatedScores() {
+            const stages = ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'];
+            const stageScores = {};
+            let totalEarned = 0;
+            let totalPossible = 0;
+
+            stages.forEach(stage => {
+                const stageInputs = document.querySelectorAll('.auto-test-score[data-stage="' + stage + '"]');
+                let stageEarned = 0;
+                let stagePossible = 0;
+
+                stageInputs.forEach(input => {
+                    const earned = parseFloat(input.value) || 0;
+                    const max = parseFloat(input.getAttribute('data-max')) || 0;
+                    stageEarned += earned;
+                    stagePossible += max;
+                });
+
+                stageScores[stage] = { earned: stageEarned, possible: stagePossible };
+                totalEarned += stageEarned;
+                totalPossible += stagePossible;
+            });
+
+            stageScores.total = { earned: totalEarned, possible: totalPossible };
+            return stageScores;
+        }
+
+        // Update individual test status
+        function updateTestStatus(testId) {
+            const input = document.getElementById(testId);
+            const itemElement = document.getElementById('item-' + testId);
+            const statusElement = document.getElementById('status-' + testId);
+
+            if (!input || !itemElement || !statusElement) return;
+
+            const earned = parseFloat(input.value) || 0;
+            const max = parseFloat(input.getAttribute('data-max')) || 0;
+
+            itemElement.classList.remove('passed', 'failed', 'partial');
+            statusElement.classList.remove('passed', 'failed', 'partial');
+
+            let newStatus = 'failed';
+            let statusText = '✗ Failed';
+
+            // Handle penalty tests (max = 0)
+            if (max === 0) {
+                if (earned >= 0) {
+                    newStatus = 'passed';
+                    statusText = '✓ Passed';
+                } else {
+                    newStatus = 'failed';
+                    statusText = '✗ Penalty';
+                }
+            } else {
+                // Regular tests
+                const percentage = (earned / max) * 100;
+                if (percentage >= 100) {
+                    newStatus = 'passed';
+                    statusText = '✓ Passed';
+                } else if (percentage >= 50) {
+                    newStatus = 'partial';
+                    statusText = '◐ Partial';
+                }
+            }
+
+            itemElement.classList.add(newStatus);
+            statusElement.classList.add(newStatus);
+            statusElement.textContent = statusText;
+        }
+
+        // Update manual grading item status
+        function updateManualStatus(itemId) {
+            const input = document.getElementById(itemId);
+            const itemElement = document.getElementById('item-' + itemId);
+            const statusElement = document.getElementById('status-' + itemId);
+
+            if (!input || !itemElement || !statusElement) return;
+
+            const earned = parseFloat(input.value) || 0;
+            const max = parseFloat(input.getAttribute('data-max')) || 0;
+
+            itemElement.classList.remove('passed', 'failed', 'partial');
+            statusElement.classList.remove('passed', 'failed', 'partial');
+
+            let newStatus = 'failed';
+            let statusText = '✗ Failed';
+
+            const percentage = max > 0 ? (earned / max) * 100 : 0;
+
+            if (percentage >= 100) {
+                newStatus = 'passed';
+                statusText = '✓ Passed';
+            } else if (percentage >= 50) {
+                newStatus = 'partial';
+                statusText = '◐ Partial';
+            }
+
+            itemElement.classList.add(newStatus);
+            statusElement.classList.add(newStatus);
+            statusElement.textContent = statusText;
+        }
+
+        // Update all totals
+        function updateAllTotals() {
+            const autoScores = calculateAutomatedScores();
+
+            // Update stage headers
+            const stageNames = Object.keys(STAGE_MAX);
+            stageNames.forEach(stageName => {
+                const stageScore = autoScores[stageName];
+                const stageHeaders = document.querySelectorAll('.stage-header');
+
+                stageHeaders.forEach(header => {
+                    const stageTitle = header.querySelector('.stage-title');
+                    if (stageTitle && stageTitle.textContent.toLowerCase().includes(stageName.replace('stage', 'stage '))) {
+                        const scoreDiv = header.querySelector('.stage-score');
+                        if (scoreDiv) {
+                            const stageMax = STAGE_MAX[stageName];
+                            scoreDiv.textContent = stageScore.earned.toFixed(1) + '/' + stageMax + ' points';
+                        }
+
+                        const progressFill = header.parentElement.querySelector('.progress-fill');
+                        if (progressFill) {
+                            const stageMax = STAGE_MAX[stageName];
+                            const percentage = stageMax > 0 ? (stageScore.earned / stageMax * 100).toFixed(0) : 0;
+                            progressFill.style.width = percentage + '%';
+                        }
+                    }
+                });
+            });
+
+            // Calculate manual grading - sum all manual grading fields
+            const manualScores = [
+                // Page Compliance (15 points)
+                parseFloat(document.getElementById('page-index').value) || 0,
+                parseFloat(document.getElementById('page-pets').value) || 0,
+                parseFloat(document.getElementById('page-gallery').value) || 0,
+                parseFloat(document.getElementById('page-add').value) || 0,
+                parseFloat(document.getElementById('page-details').value) || 0,
+                parseFloat(document.getElementById('page-owner').value) || 0,
+                parseFloat(document.getElementById('page-edit').value) || 0,
+                parseFloat(document.getElementById('page-search').value) || 0,
+                parseFloat(document.getElementById('page-login').value) || 0,
+                parseFloat(document.getElementById('page-register').value) || 0,
+                // Site Deployment (10 points)
+                parseFloat(document.getElementById('deploy-site').value) || 0,
+                parseFloat(document.getElementById('deploy-readme').value) || 0,
+                parseFloat(document.getElementById('deploy-images').value) || 0,
+                // GitHub and Project History (10 points)
+                parseFloat(document.getElementById('git-vcs').value) || 0,
+                parseFloat(document.getElementById('git-commits').value) || 0,
+                parseFloat(document.getElementById('git-messages').value) || 0
+            ];
+            const manualTotal = manualScores.reduce((a, b) => a + b, 0);
+            document.getElementById('manual-total').textContent = manualTotal.toFixed(1) + ' / ' + MANUAL_MAX.total;
+
+            // Update automated score display
+            const automatedScore = autoScores.total.earned;
+            const automatedMax = autoScores.total.possible;
+            document.getElementById('automated-score').textContent = automatedScore.toFixed(1) + ' / ' + automatedMax;
+
+            // Calculate final total
+            const finalTotal = automatedScore + manualTotal;
+            const finalMax = automatedMax + MANUAL_MAX.total;
+            document.getElementById('final-total').textContent = finalTotal.toFixed(1) + ' / ' + finalMax;
+
+            // Update top summary section
+            const totalPercentage = (finalTotal / finalMax * 100).toFixed(2);
+
+            // Calculate tests passed
+            const autoTestInputs = document.querySelectorAll('.auto-test-score');
+            let testsPassed = 0;
+            autoTestInputs.forEach(input => {
+                const earned = parseFloat(input.value) || 0;
+                const max = parseFloat(input.getAttribute('data-max')) || 0;
+                if (max > 0) {
+                    // Regular test: passed if earned >= max
+                    if (earned >= max) testsPassed++;
+                } else {
+                    // Penalty test: passed if no penalty (earned >= 0)
+                    if (earned >= 0) testsPassed++;
+                }
+            });
+            const testsTotal = autoTestInputs.length;
+
+            // Update grade
+            let grade = 'NN';
+            if (totalPercentage >= 80) grade = 'HD';
+            else if (totalPercentage >= 70) grade = 'DI';
+            else if (totalPercentage >= 60) grade = 'CR';
+            else if (totalPercentage >= 50) grade = 'PA';
+
+            // Update summary cards
+            const summaryCards = document.querySelectorAll('.summary-card');
+            summaryCards.forEach(card => {
+                const h3 = card.querySelector('h3');
+
+                if (h3 && h3.textContent === 'Tests Passed') {
+                    const valueDiv = card.querySelector('.value');
+                    if (valueDiv) {
+                        valueDiv.textContent = testsPassed + '/' + testsTotal;
+                    }
+                }
+
+                if (h3 && h3.textContent === 'Total Score') {
+                    const valueDiv = card.querySelector('.value');
+                    if (valueDiv) {
+                        valueDiv.textContent = finalTotal.toFixed(1) + '/' + finalMax;
+                    }
+                }
+
+                if (h3 && h3.textContent === 'Grade') {
+                    const valueDiv = card.querySelector('.value');
+                    const percentDiv = card.querySelector('div[style*="font-size: 0.9em"]');
+                    if (valueDiv) {
+                        valueDiv.textContent = grade;
+                        card.className = 'summary-card grade-card ' + grade;
+                    }
+                    if (percentDiv) {
+                        percentDiv.textContent = totalPercentage + '%';
+                    }
+                }
+            });
+        }
+
+        // Validate input
+        document.querySelectorAll('.manual-score, .auto-test-score').forEach(input => {
+            input.addEventListener('input', function() {
+                const max = parseFloat(this.getAttribute('data-max'));
+                const value = parseFloat(this.value);
+                if (value > max) this.value = max;
+                if (value < 0) this.value = 0;
+            });
+        });
+
+        // Initialize all statuses
+        function initializeStatuses() {
+            document.querySelectorAll('.auto-test-score').forEach(input => {
+                const testId = input.id;
+                updateTestStatus(testId);
+            });
+
+            document.querySelectorAll('.manual-score').forEach(input => {
+                const itemId = input.id;
+                updateManualStatus(itemId);
+            });
+        }
+
+        initializeStatuses();
+        updateAllTotals();
+    </script>
+
+</body></html>

@@ -1,0 +1,16 @@
+# PetConnect – .htaccess
+# Prevents directory listing and direct access to include/SQL files.
+
+Options -Indexes
+
+# Block direct access to PHP include files
+<FilesMatch "\.inc$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block direct access to SQL files
+<FilesMatch "\.sql$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

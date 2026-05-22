@@ -1,0 +1,13 @@
+# PetConnect – .gitignore
+
+# Exclude uploaded pet images (runtime files, not source code)
+assets/images/pets/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp

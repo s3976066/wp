@@ -1,0 +1,32 @@
+body {
+    background-color: #eee7e7;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-background {
+    background-image: url('../images/logo.jpeg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 100px;
+    background-color: #fff;
+}
+
+.logo-background h1,
+.logo-background h2 {
+    margin-left: 120px;
+}
+
+main {
+    flex: 1;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+    font-size: 20px;
+}
