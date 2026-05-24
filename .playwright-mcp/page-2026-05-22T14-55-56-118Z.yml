@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "pets PetConnect" [ref=e6] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e7]: pets
+          - text: PetConnect
+        - generic [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "Home" [ref=e11] [cursor=pointer]:
+                - /url: index.php
+            - listitem [ref=e12]:
+              - link "Browse Pets" [ref=e13] [cursor=pointer]:
+                - /url: pets.php
+            - listitem [ref=e14]:
+              - link "Gallery" [ref=e15] [cursor=pointer]:
+                - /url: gallery.php
+            - listitem [ref=e16]:
+              - link "search Search" [ref=e17] [cursor=pointer]:
+                - /url: search.php
+                - generic [ref=e18]: search
+                - text: Search
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Login" [ref=e21] [cursor=pointer]:
+                - /url: login.php
+            - listitem [ref=e22]:
+              - link "Register" [ref=e23] [cursor=pointer]:
+                - /url: register.php
+    - heading "添加宠物" [level=1] [ref=e24]
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: 宠物名称 *
+            - textbox "宠物名称 *" [ref=e30]
+          - generic [ref=e31]:
+            - generic [ref=e32]: 物种 *
+            - combobox "物种 *" [ref=e33]:
+              - option "-- 请选择 --" [selected]
+              - option "狗"
+              - option "猫"
+              - option "鸟"
+              - option "兔"
+              - option "其他"
+          - generic [ref=e34]:
+            - generic [ref=e35]: 品种
+            - textbox "品种" [ref=e36]
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - generic [ref=e39]: 年龄（年）
+              - spinbutton "年龄（年）" [ref=e40]
+            - generic [ref=e41]:
+              - generic [ref=e42]: 年龄（月）
+              - spinbutton "年龄（月）" [ref=e43]
+          - generic [ref=e44]:
+            - generic [ref=e45]: 性别
+            - combobox "性别" [ref=e46]:
+              - option "雄性"
+              - option "雌性"
+              - option "未知" [selected]
+          - generic [ref=e47]:
+            - generic [ref=e48]: 体型
+            - combobox "体型" [ref=e49]:
+              - option "小型"
+              - option "中型" [selected]
+              - option "大型"
+              - option "超大型"
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]: 描述 *
+            - textbox "描述 *" [ref=e53]
+          - generic [ref=e54]:
+            - generic [ref=e55]: 健康信息
+            - textbox "健康信息" [ref=e56]
+          - generic [ref=e57]:
+            - generic [ref=e58]: 领养费用 ($)
+            - spinbutton "领养费用 ($)" [ref=e59]: "0.00"
+          - generic [ref=e60]:
+            - generic [ref=e61]: 状态
+            - combobox "状态" [ref=e62]:
+              - option "可领养" [selected]
+              - option "待处理"
+              - option "已领养"
+          - generic [ref=e63]:
+            - generic [ref=e64]: 宠物图片
+            - button "宠物图片" [ref=e65] [cursor=pointer]
+      - generic [ref=e66]:
+        - button "添加宠物" [ref=e67] [cursor=pointer]
+        - link "取消" [ref=e68] [cursor=pointer]:
+          - /url: index.php
+  - contentinfo [ref=e69]:
+    - paragraph [ref=e70]: © 2026 s3976066. Connecting pets with loving homes.

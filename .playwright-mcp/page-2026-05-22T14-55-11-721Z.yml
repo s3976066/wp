@@ -1,0 +1,106 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "pets PetConnect" [ref=e6] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e7]: pets
+          - text: PetConnect
+        - generic [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "Home" [ref=e11] [cursor=pointer]:
+                - /url: index.php
+            - listitem [ref=e12]:
+              - link "Browse Pets" [ref=e13] [cursor=pointer]:
+                - /url: pets.php
+            - listitem [ref=e14]:
+              - link "Gallery" [ref=e15] [cursor=pointer]:
+                - /url: gallery.php
+            - listitem [ref=e16]:
+              - link "search Search" [ref=e17] [cursor=pointer]:
+                - /url: search.php
+                - generic [ref=e18]: search
+                - text: Search
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Login" [ref=e21] [cursor=pointer]:
+                - /url: login.php
+            - listitem [ref=e22]:
+              - link "Register" [ref=e23] [cursor=pointer]:
+                - /url: register.php
+    - heading "宠物画廊" [level=1] [ref=e24]
+    - generic [ref=e25]:
+      - generic [ref=e26]: 按状态筛选
+      - combobox "按状态筛选" [ref=e27]:
+        - option "显示全部" [selected]
+        - option "可领养"
+        - option "待处理"
+        - option "已领养"
+    - generic [ref=e28]:
+      - generic [ref=e30]:
+        - link "Buddy" [ref=e31] [cursor=pointer]:
+          - /url: details.php?id=1
+          - img "Buddy" [ref=e32]
+        - generic [ref=e33]:
+          - heading "Buddy" [level=6] [ref=e34]
+          - paragraph [ref=e35]: Dog
+          - generic [ref=e36]: Available
+      - generic [ref=e38]:
+        - link "Whiskers" [ref=e39] [cursor=pointer]:
+          - /url: details.php?id=2
+          - img "Whiskers" [ref=e40]
+        - generic [ref=e41]:
+          - heading "Whiskers" [level=6] [ref=e42]
+          - paragraph [ref=e43]: Cat
+          - generic [ref=e44]: Available
+      - generic [ref=e46]:
+        - link "Max" [ref=e47] [cursor=pointer]:
+          - /url: details.php?id=3
+          - img "Max" [ref=e48]
+        - generic [ref=e49]:
+          - heading "Max" [level=6] [ref=e50]
+          - paragraph [ref=e51]: Dog
+          - generic [ref=e52]: Available
+      - generic [ref=e54]:
+        - link "Luna" [ref=e55] [cursor=pointer]:
+          - /url: details.php?id=4
+          - img "Luna" [ref=e56]
+        - generic [ref=e57]:
+          - heading "Luna" [level=6] [ref=e58]
+          - paragraph [ref=e59]: Cat
+          - generic [ref=e60]: Pending
+      - generic [ref=e62]:
+        - link "Charlie" [ref=e63] [cursor=pointer]:
+          - /url: details.php?id=5
+          - img "Charlie" [ref=e64]
+        - generic [ref=e65]:
+          - heading "Charlie" [level=6] [ref=e66]
+          - paragraph [ref=e67]: Bird
+          - generic [ref=e68]: Available
+      - generic [ref=e70]:
+        - link "Bella" [ref=e71] [cursor=pointer]:
+          - /url: details.php?id=6
+          - img "Bella" [ref=e72]
+        - generic [ref=e73]:
+          - heading "Bella" [level=6] [ref=e74]
+          - paragraph [ref=e75]: Dog
+          - generic [ref=e76]: Available
+      - generic [ref=e78]:
+        - link "Oliver" [ref=e79] [cursor=pointer]:
+          - /url: details.php?id=7
+          - img "Oliver" [ref=e80]
+        - generic [ref=e81]:
+          - heading "Oliver" [level=6] [ref=e82]
+          - paragraph [ref=e83]: Cat
+          - generic [ref=e84]: Available
+      - generic [ref=e86]:
+        - link "Rocky" [ref=e87] [cursor=pointer]:
+          - /url: details.php?id=8
+          - img "Rocky" [ref=e88]
+        - generic [ref=e89]:
+          - heading "Rocky" [level=6] [ref=e90]
+          - paragraph [ref=e91]: Dog
+          - generic [ref=e92]: Available
+  - contentinfo [ref=e93]:
+    - paragraph [ref=e94]: © 2026 s3976066. Connecting pets with loving homes.

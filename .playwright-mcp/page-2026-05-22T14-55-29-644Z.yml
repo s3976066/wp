@@ -1,0 +1,53 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "pets PetConnect" [ref=e6] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e7]: pets
+          - text: PetConnect
+        - generic [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "Home" [ref=e11] [cursor=pointer]:
+                - /url: index.php
+            - listitem [ref=e12]:
+              - link "Browse Pets" [ref=e13] [cursor=pointer]:
+                - /url: pets.php
+            - listitem [ref=e14]:
+              - link "Gallery" [ref=e15] [cursor=pointer]:
+                - /url: gallery.php
+            - listitem [ref=e16]:
+              - link "search Search" [ref=e17] [cursor=pointer]:
+                - /url: search.php
+                - generic [ref=e18]: search
+                - text: Search
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Login" [ref=e21] [cursor=pointer]:
+                - /url: login.php
+            - listitem [ref=e22]:
+              - link "Register" [ref=e23] [cursor=pointer]:
+                - /url: register.php
+    - heading "宠物画廊" [level=1] [ref=e24]
+    - generic [ref=e25]:
+      - generic [ref=e26]: 按状态筛选
+      - combobox "按状态筛选" [ref=e27]:
+        - option "显示全部"
+        - option "可领养"
+        - option "待处理" [selected]
+        - option "已领养"
+    - generic [ref=e54]:
+      - link "Luna" [ref=e55] [cursor=pointer]:
+        - /url: details.php?id=4
+        - img "Luna" [ref=e56]
+      - generic [ref=e57]:
+        - heading "Luna" [level=6] [ref=e58]
+        - paragraph [ref=e59]: Cat
+        - generic [ref=e60]: Pending
+    - dialog [active] [ref=e95]:
+      - generic [ref=e97]:
+        - heading "Luna" [level=5] [ref=e98]
+        - button "Close" [ref=e99] [cursor=pointer]
+  - contentinfo [ref=e93]:
+    - paragraph [ref=e94]: © 2026 s3976066. Connecting pets with loving homes.

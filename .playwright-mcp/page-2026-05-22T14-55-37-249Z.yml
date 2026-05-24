@@ -1,0 +1,69 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "pets PetConnect" [ref=e6] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e7]: pets
+          - text: PetConnect
+        - generic [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "Home" [ref=e11] [cursor=pointer]:
+                - /url: index.php
+            - listitem [ref=e12]:
+              - link "Browse Pets" [ref=e13] [cursor=pointer]:
+                - /url: pets.php
+            - listitem [ref=e14]:
+              - link "Gallery" [ref=e15] [cursor=pointer]:
+                - /url: gallery.php
+            - listitem [ref=e16]:
+              - link "search Search" [ref=e17] [cursor=pointer]:
+                - /url: search.php
+                - generic [ref=e18]: search
+                - text: Search
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Login" [ref=e21] [cursor=pointer]:
+                - /url: login.php
+            - listitem [ref=e22]:
+              - link "Register" [ref=e23] [cursor=pointer]:
+                - /url: register.php
+    - generic [ref=e24]:
+      - img "Buddy" [ref=e26]
+      - generic [ref=e27]:
+        - heading "Buddy" [level=2] [ref=e28]
+        - generic [ref=e29]: Available
+        - table [ref=e30]:
+          - rowgroup [ref=e31]:
+            - row "物种 Dog" [ref=e32]:
+              - rowheader "物种" [ref=e33]
+              - cell "Dog" [ref=e34]
+            - row "品种 Golden Retriever" [ref=e35]:
+              - rowheader "品种" [ref=e36]
+              - cell "Golden Retriever" [ref=e37]
+            - row "年龄 3 岁 6 个月" [ref=e38]:
+              - rowheader "年龄" [ref=e39]
+              - cell "3 岁 6 个月" [ref=e40]
+            - row "性别 Male" [ref=e41]:
+              - rowheader "性别" [ref=e42]
+              - cell "Male" [ref=e43]
+            - row "体型 Large" [ref=e44]:
+              - rowheader "体型" [ref=e45]
+              - cell "Large" [ref=e46]
+            - row "领养费用 $250.00" [ref=e47]:
+              - rowheader "领养费用" [ref=e48]
+              - cell "$250.00" [ref=e49]
+            - row "发布时间 2026-05-01" [ref=e50]:
+              - rowheader "发布时间" [ref=e51]
+              - cell "2026-05-01" [ref=e52]
+        - heading "简介" [level=5] [ref=e53]
+        - paragraph [ref=e54]: Friendly and energetic golden retriever looking for an active family. Loves playing fetch and swimming.
+        - heading "健康信息" [level=5] [ref=e55]
+        - paragraph [ref=e56]: Fully vaccinated, microchipped, neutered. No known health issues.
+    - generic [ref=e57]:
+      - link "编辑" [ref=e58] [cursor=pointer]:
+        - /url: edit.php?id=1
+      - button "删除" [ref=e59] [cursor=pointer]
+  - contentinfo [ref=e60]:
+    - paragraph [ref=e61]: © 2026 s3976066. Connecting pets with loving homes.

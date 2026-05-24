@@ -1,0 +1,106 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "pets PetConnect" [ref=e6] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e7]: pets
+          - text: PetConnect
+        - generic [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "Home" [ref=e11] [cursor=pointer]:
+                - /url: index.php
+            - listitem [ref=e12]:
+              - link "Browse Pets" [ref=e13] [cursor=pointer]:
+                - /url: pets.php
+            - listitem [ref=e14]:
+              - link "Gallery" [ref=e15] [cursor=pointer]:
+                - /url: gallery.php
+            - listitem [ref=e16]:
+              - link "search Search" [ref=e17] [cursor=pointer]:
+                - /url: search.php
+                - generic [ref=e18]: search
+                - text: Search
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Add Pet" [ref=e21] [cursor=pointer]:
+                - /url: add.php
+            - listitem [ref=e22]:
+              - link "sarah_animal_lover" [ref=e23] [cursor=pointer]:
+                - /url: owner.php?user_id=1
+            - listitem [ref=e24]:
+              - link "Logout" [ref=e25] [cursor=pointer]:
+                - /url: logout.php
+    - generic [ref=e26]:
+      - text: 欢迎回来，
+      - strong [ref=e27]: sarah_animal_lover
+      - text: ！
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - button "Slide 1" [ref=e31] [cursor=pointer]
+        - button "Slide 2" [ref=e32] [cursor=pointer]
+        - button "Slide 3" [ref=e33] [cursor=pointer]
+        - button "Slide 4" [ref=e34] [cursor=pointer]
+      - generic [ref=e36]:
+        - link "Buddy" [ref=e37] [cursor=pointer]:
+          - /url: details.php?id=1
+          - img "Buddy" [ref=e38]
+        - generic [ref=e39]:
+          - heading "Buddy" [level=5] [ref=e40]
+          - paragraph [ref=e41]: Dog — Golden Retriever
+      - button "Previous" [ref=e42] [cursor=pointer]:
+        - generic [ref=e44]: Previous
+      - button "Next" [ref=e45] [cursor=pointer]:
+        - generic [ref=e47]: Next
+    - generic [ref=e48]:
+      - heading "最新可领养宠物" [level=2] [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e52]:
+          - link "Buddy" [ref=e53] [cursor=pointer]:
+            - /url: details.php?id=1
+            - img "Buddy" [ref=e54]
+          - generic [ref=e55]:
+            - heading "Buddy" [level=5] [ref=e56]:
+              - link "Buddy" [ref=e57] [cursor=pointer]:
+                - /url: details.php?id=1
+            - paragraph [ref=e58]: Dog
+            - paragraph [ref=e59]: Golden Retriever
+            - generic [ref=e60]: Available
+        - generic [ref=e62]:
+          - link "Whiskers" [ref=e63] [cursor=pointer]:
+            - /url: details.php?id=2
+            - img "Whiskers" [ref=e64]
+          - generic [ref=e65]:
+            - heading "Whiskers" [level=5] [ref=e66]:
+              - link "Whiskers" [ref=e67] [cursor=pointer]:
+                - /url: details.php?id=2
+            - paragraph [ref=e68]: Cat
+            - paragraph [ref=e69]: Tabby
+            - generic [ref=e70]: Available
+        - generic [ref=e72]:
+          - link "Max" [ref=e73] [cursor=pointer]:
+            - /url: details.php?id=3
+            - img "Max" [ref=e74]
+          - generic [ref=e75]:
+            - heading "Max" [level=5] [ref=e76]:
+              - link "Max" [ref=e77] [cursor=pointer]:
+                - /url: details.php?id=3
+            - paragraph [ref=e78]: Dog
+            - paragraph [ref=e79]: Labrador Mix
+            - generic [ref=e80]: Available
+        - generic [ref=e82]:
+          - link "Luna" [ref=e83] [cursor=pointer]:
+            - /url: details.php?id=4
+            - img "Luna" [ref=e84]
+          - generic [ref=e85]:
+            - heading "Luna" [level=5] [ref=e86]:
+              - link "Luna" [ref=e87] [cursor=pointer]:
+                - /url: details.php?id=4
+            - paragraph [ref=e88]: Cat
+            - paragraph [ref=e89]: Siamese
+            - generic [ref=e90]: Pending
+      - link "查看全部宠物" [ref=e92] [cursor=pointer]:
+        - /url: pets.php
+  - contentinfo [ref=e93]:
+    - paragraph [ref=e94]: © 2026 s3976066. Connecting pets with loving homes.

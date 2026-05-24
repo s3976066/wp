@@ -2,6 +2,13 @@
 $pageTitle = 'Add a Pet';
 require_once 'includes/db_connect.inc';
 
+// Stage 5: 登录检查
+if (empty($_SESSION['user_id'])) {
+    $_SESSION['flash'] = ['type' => 'warning', 'message' => '请先登录后再添加宠物。'];
+    header('Location: login.php');
+    exit;
+}
+
 $errors = [];
 $success = false;
 
@@ -56,8 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 数据库插入
     if (empty($errors)) {
-        // TODO Stage 5: 将 user_id 替换为 $_SESSION['user_id']
-        $userId = 1;
+        $userId = (int)$_SESSION['user_id'];
 
         $stmt = mysqli_prepare($conn,
             "INSERT INTO pets (user_id, name, species, breed, age_years, age_months,

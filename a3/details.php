@@ -2,6 +2,53 @@
 $pageTitle = 'Pet Details';
 require_once 'includes/db_connect.inc';
 
+// Stage 5: 处理删除请求（在页面顶部，确保无输出）
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
+    if (empty($_SESSION['user_id'])) {
+        $_SESSION['flash'] = ['type' => 'danger', 'message' => '请先登录。'];
+        header('Location: login.php');
+        exit;
+    }
+
+    $deleteId = (int)($_POST['pet_id'] ?? 0);
+    $stmt = mysqli_prepare($conn, "SELECT pet_id, user_id, image_path FROM pets WHERE pet_id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $deleteId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $target = mysqli_fetch_assoc($result);
+    mysqli_stmt_close($stmt);
+
+    if (!$target) {
+        $_SESSION['flash'] = ['type' => 'danger', 'message' => '宠物不存在。'];
+        header('Location: index.php');
+        exit;
+    }
+
+    if ((int)$target['user_id'] !== (int)$_SESSION['user_id']) {
+        $_SESSION['flash'] = ['type' => 'danger', 'message' => '无权删除此宠物。'];
+        header('Location: index.php');
+        exit;
+    }
+
+    // 删除数据库记录
+    $stmt = mysqli_prepare($conn, "DELETE FROM pets WHERE pet_id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $deleteId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    // 删除图片文件
+    if (!empty($target['image_path'])) {
+        $filePath = 'assets/images/pets/' . $target['image_path'];
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    $_SESSION['flash'] = ['type' => 'success', 'message' => '宠物已成功删除。'];
+    header('Location: pets.php');
+    exit;
+}
+
 // 输入验证
 $petId = $_GET['id'] ?? null;
 $error = null;
@@ -14,11 +61,11 @@ if ($petId === null || $petId === '') {
 
 $pet = null;
 $owner = null;
+$isOwner = false;
 
 if ($error === null) {
     $petId = (int)$petId;
 
-    // 查询宠物记录
     $stmt = mysqli_prepare($conn, "SELECT * FROM pets WHERE pet_id = ?");
     mysqli_stmt_bind_param($stmt, 'i', $petId);
     mysqli_stmt_execute($stmt);
@@ -29,6 +76,9 @@ if ($error === null) {
     if (!$pet) {
         $error = '未找到该宠物。该宠物可能已被移除。';
     } else {
+        // 所有权判断（服务端条件渲染用）
+        $isOwner = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] === (int)$pet['user_id'];
+
         // 查询主人信息
         $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE user_id = ?");
         mysqli_stmt_bind_param($stmt, 'i', $pet['user_id']);
@@ -39,18 +89,11 @@ if ($error === null) {
     }
 }
 
-// 年龄格式化辅助函数
 function formatAge($years, $months) {
     $parts = [];
-    if ($years !== null && $years > 0) {
-        $parts[] = $years . ' 岁';
-    }
-    if ($months !== null && $months > 0) {
-        $parts[] = $months . ' 个月';
-    }
-    if (empty($parts)) {
-        return '不足 1 个月';
-    }
+    if ($years !== null && $years > 0) $parts[] = $years . ' 岁';
+    if ($months !== null && $months > 0) $parts[] = $months . ' 个月';
+    if (empty($parts)) return '不足 1 个月';
     return implode(' ', $parts);
 }
 
@@ -66,14 +109,12 @@ require_once 'includes/nav.inc';
     </div>
 <?php else: ?>
     <div class="row">
-        <!-- 左侧大图 -->
         <div class="col-md-6 mb-4">
             <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
                  class="img-fluid rounded w-100" style="object-fit: cover; max-height: 450px;"
                  alt="<?= htmlspecialchars($pet['name']) ?>">
         </div>
 
-        <!-- 右侧详情 -->
         <div class="col-md-6">
             <h2><?= htmlspecialchars($pet['name']) ?></h2>
             <span class="badge badge-<?= strtolower($pet['status']) ?> mb-3 fs-6">
@@ -102,7 +143,6 @@ require_once 'includes/nav.inc';
         </div>
     </div>
 
-    <!-- 主人信息卡片 -->
     <?php if ($owner): ?>
     <div class="card mt-4">
         <div class="card-body">
@@ -129,7 +169,8 @@ require_once 'includes/nav.inc';
     </div>
     <?php endif; ?>
 
-    <!-- Edit/Delete 按钮（Stage 5 添加所有权检查） -->
+    <!-- 编辑/删除按钮（仅主人可见） -->
+    <?php if ($isOwner): ?>
     <div class="d-flex gap-2 mt-4">
         <a href="edit.php?id=<?= (int)$pet['pet_id'] ?>" class="btn btn-primary">编辑</a>
         <button type="button" id="deleteBtn" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -137,7 +178,7 @@ require_once 'includes/nav.inc';
         </button>
     </div>
 
-    <!-- 删除确认模态框（Stage 3 JS 控制） -->
+    <!-- 删除确认模态框 -->
     <div id="deleteModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -151,7 +192,8 @@ require_once 'includes/nav.inc';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">取消</button>
-                    <form id="deleteForm" action="process_delete.php" method="post" class="d-inline">
+                    <form id="deleteForm" action="details.php" method="post" class="d-inline">
+                        <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="pet_id" value="<?= (int)$pet['pet_id'] ?>">
                         <button type="submit" id="confirmDelete" class="btn btn-danger">确认删除</button>
                     </form>
@@ -159,6 +201,7 @@ require_once 'includes/nav.inc';
             </div>
         </div>
     </div>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php
