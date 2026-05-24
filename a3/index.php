@@ -13,6 +13,12 @@ require_once 'includes/header.inc';
 require_once 'includes/nav.inc';
 ?>
 
+<?php if (isset($_SESSION['user_id'])): ?>
+    <div class="alert alert-info mb-4">
+        欢迎回来，<strong><?= htmlspecialchars($_SESSION['username']) ?></strong>！
+    </div>
+<?php endif; ?>
+
 <?php if (empty($pets)): ?>
     <div class="text-center py-5">
         <span class="material-icons" style="font-size: 4rem; color: var(--text-muted);">pets</span>
