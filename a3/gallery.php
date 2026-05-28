@@ -61,7 +61,7 @@ require_once 'includes/nav.inc';
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img id="galleryModalImage" src="" class="img-fluid rounded" alt="">
+                <img id="galleryModalImage" src="" class="img-fluid rounded" alt="宠物图片预览">
             </div>
         </div>
     </div>
