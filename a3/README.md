@@ -1,2 +1,3 @@
-# Assessment 3
-This is the file where you will have to provide a link to your project on the RMIT webserver
+# Assessment 3 — PetConnect
+Live site: https://titan.csit.rmit.edu.au/~s3976066/a3/
+GitHub: https://github.com/s3976066/wp/tree/main/a3

@@ -13,7 +13,7 @@ $isProd = (stripos($server, 'rmit.edu.au') !== false) ||
 if ($isProd) {
     $dbHost = 'talsprddb02.int.its.rmit.edu.au';
     $dbUser = 's3976066';
-    $dbPass = '<I_WILL_FILL_THIS_IN_BEFORE_DEPLOY>';
+    $dbPass = 'zyz200311';
     $dbName = 's3976066';
 } else {
     $dbHost = 'localhost';
