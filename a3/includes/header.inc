@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
-// Flash 消息显示
+// Flash message display
 if (!empty($_SESSION['flash'])) {
     $flash = $_SESSION['flash'];
     $type = $flash['type'] ?? 'info';

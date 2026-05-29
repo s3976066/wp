@@ -8,15 +8,14 @@ $user = null;
 $pets = [];
 
 if ($userId === null || $userId === '') {
-    $error = '未指定用户。';
+    $error = 'No user specified.';
 } elseif (!is_numeric($userId) || (int)$userId <= 0) {
-    $error = '无效的用户 ID。';
+    $error = 'Invalid user ID.';
 }
 
 if ($error === null) {
     $userId = (int)$userId;
 
-    // 查询用户信息
     $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE user_id = ?");
     mysqli_stmt_bind_param($stmt, 'i', $userId);
     mysqli_stmt_execute($stmt);
@@ -25,9 +24,8 @@ if ($error === null) {
     mysqli_stmt_close($stmt);
 
     if (!$user) {
-        $error = '未找到该用户。';
+        $error = 'User not found.';
     } else {
-        // 查询该用户的所有宠物
         $stmt = mysqli_prepare($conn,
             "SELECT * FROM pets WHERE user_id = ? ORDER BY created_at DESC");
         mysqli_stmt_bind_param($stmt, 'i', $userId);
@@ -46,12 +44,11 @@ require_once 'includes/nav.inc';
     <div class="text-center py-5">
         <span class="material-icons" style="font-size: 4rem; color: var(--text-muted);">person_off</span>
         <h2 class="mt-3"><?= htmlspecialchars($error) ?></h2>
-        <a href="pets.php" class="btn btn-primary mt-3">浏览所有宠物</a>
+        <a href="pets.php" class="btn btn-primary mt-3">Browse All Pets</a>
     </div>
 <?php else: ?>
-    <h1 class="mb-4">主人资料</h1>
+    <h1 class="mb-4">Owner Profile</h1>
 
-    <!-- 主人信息卡片 -->
     <div class="card mb-4">
         <div class="card-body">
             <div class="row">
@@ -62,26 +59,25 @@ require_once 'includes/nav.inc';
                         <?= htmlspecialchars($user['email']) ?>
                     </p>
                     <?php if (!empty($user['phone'])): ?>
-                    <p class="mb-1"><strong>电话：</strong><?= htmlspecialchars($user['phone']) ?></p>
+                    <p class="mb-1"><strong>Phone:</strong> <?= htmlspecialchars($user['phone']) ?></p>
                     <?php endif; ?>
                     <?php if (!empty($user['location'])): ?>
-                    <p class="mb-1"><strong>所在地：</strong><?= htmlspecialchars($user['location']) ?></p>
+                    <p class="mb-1"><strong>Location:</strong> <?= htmlspecialchars($user['location']) ?></p>
                     <?php endif; ?>
                     <p class="mb-0 text-muted">
-                        <small>加入时间：<?= date('Y年m月', strtotime($user['joined_at'])) ?></small>
+                        <small>Member since <?= date('F Y', strtotime($user['joined_at'])) ?></small>
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 主人的宠物 -->
-    <h3 class="mb-3"><?= htmlspecialchars($user['username']) ?> 的宠物 (<?= count($pets) ?>)</h3>
+    <h3 class="mb-3"><?= htmlspecialchars($user['username']) ?>&rsquo;s Pets (<?= count($pets) ?>)</h3>
 
     <?php if (empty($pets)): ?>
         <div class="text-center text-muted py-4">
-            <p>该主人暂无宠物。</p>
-            <a href="pets.php" class="btn btn-outline-light">浏览所有宠物</a>
+            <p>This owner has no pets listed at the moment.</p>
+            <a href="pets.php" class="btn btn-outline-light">Browse All Pets</a>
         </div>
     <?php else: ?>
         <div class="row">

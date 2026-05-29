@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 双环境检测：localhost vs Jacob 5
+// Dual-environment detection: localhost vs Jacob 5
 $server = $_SERVER['SERVER_NAME'] ?? 'localhost';
 $isProd = (stripos($server, 'rmit.edu.au') !== false) ||
           (stripos($server, 'jupiter') !== false) ||
@@ -13,7 +13,7 @@ $isProd = (stripos($server, 'rmit.edu.au') !== false) ||
 if ($isProd) {
     $dbHost = 'talsprddb02.int.its.rmit.edu.au';
     $dbUser = 's3976066';
-    $dbPass = 'zyz200311';
+    $dbPass = 'zyz00311';
     $dbName = 's3976066';
 } else {
     $dbHost = 'localhost';

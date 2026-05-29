@@ -1,0 +1,21 @@
+- generic [ref=e2]:
+  - heading "欢迎使用 phpMyAdmin" [level=1] [ref=e4]
+  - table [ref=e5]:
+    - rowgroup [ref=e6]:
+      - row [ref=e7]:
+        - cell [ref=e8]:
+          - alert [ref=e9]:
+            - heading "错误" [level=1] [ref=e10]
+            - paragraph [ref=e11]:
+              - strong [ref=e12]: MySQL 返回：
+              - link "文档" [ref=e13] [cursor=pointer]:
+                - /url: ./url.php?url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fserver-error-reference.html
+                - img "文档" [ref=e14]
+            - code [ref=e15]: 无法连接：无效的设置。
+          - alert [ref=e16]: "mysqli::real_connect(): php_network_getaddresses: getaddrinfo for talsprddb02.int.its.rmit.edu.au failed: ��֪������������"
+          - alert [ref=e17]: "mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo for talsprddb02.int.its.rmit.edu.au failed: ��֪������������"
+          - alert [ref=e18]: phpMyAdmin 尝试连接到 MySQL 服务器，但服务器拒绝连接。您应该检查配置文件中的主机、用户名和密码，并确认这些信息与 MySQL 服务器管理员所给出的信息一致。
+      - row "重试连接" [ref=e19]:
+        - cell "重试连接" [ref=e20]:
+          - link "重试连接" [ref=e21] [cursor=pointer]:
+            - /url: index.php?route=/&lang=zh_CN

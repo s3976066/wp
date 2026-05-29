@@ -1,4 +1,4 @@
-// PetConnect — shared JavaScript (Stage 3)
+// PetConnect — shared JavaScript
 document.addEventListener('DOMContentLoaded', () => {
     initImageValidation();
     initImagePreview();
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDeleteConfirmation();
 });
 
-// ===== 1. 图片扩展名校验 =====
+// ===== 1. Image file extension validation =====
 function initImageValidation() {
     const input = document.querySelector('#imageInput');
     if (!input) return;
@@ -50,12 +50,12 @@ function initImageValidation() {
     }
 }
 
-// ===== 2. 图片预览（占位，功能已在 initImageValidation 中覆盖） =====
+// ===== 2. Image preview (no-op, handled by initImageValidation) =====
 function initImagePreview() {
     return;
 }
 
-// ===== 3. 画廊图片模态框 =====
+// ===== 3. Gallery image modal =====
 function initGalleryModal() {
     const images = document.querySelectorAll('.gallery-img');
     const modal = document.querySelector('#galleryModal');
@@ -74,7 +74,7 @@ function initGalleryModal() {
     });
 }
 
-// ===== 4. 状态下拉筛选 =====
+// ===== 4. Status dropdown filter =====
 function initStatusFilter() {
     const select = document.querySelector('#statusFilter');
     if (!select) return;
@@ -90,7 +90,7 @@ function initStatusFilter() {
     });
 }
 
-// ===== 5. 删除确认模态框 =====
+// ===== 5. Delete confirmation modal =====
 function initDeleteConfirmation() {
     const deleteBtn = document.querySelector('#deleteBtn');
     const deleteModal = document.querySelector('#deleteModal');

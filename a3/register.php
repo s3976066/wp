@@ -15,34 +15,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $old = ['username' => $username, 'email' => $email, 'phone' => $phone, 'location' => $location];
 
-    // 必填验证
-    if ($username === '') $errors[] = '用户名不能为空。';
-    if ($email === '') $errors[] = '邮箱不能为空。';
-    if ($password === '') $errors[] = '密码不能为空。';
+    if ($username === '') $errors[] = 'Username is required.';
+    if ($email === '') $errors[] = 'Email is required.';
+    if ($password === '') $errors[] = 'Password is required.';
 
-    // 邮箱格式
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = '邮箱格式无效。';
+        $errors[] = 'Invalid email format.';
     }
 
-    // 密码长度
     if ($password !== '' && strlen($password) < 8) {
-        $errors[] = '密码长度至少 8 位。';
+        $errors[] = 'Password must be at least 8 characters.';
     }
 
-    // 密码确认
     if ($password !== '' && $password !== $passwordConfirm) {
-        $errors[] = '两次密码不一致。';
+        $errors[] = 'Passwords do not match.';
     }
 
-    // 唯一性检查
     if (empty($errors)) {
         $stmt = mysqli_prepare($conn, "SELECT user_id FROM users WHERE username = ?");
         mysqli_stmt_bind_param($stmt, 's', $username);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         if (mysqli_stmt_num_rows($stmt) > 0) {
-            $errors[] = '用户名已存在。';
+            $errors[] = 'Username already taken.';
         }
         mysqli_stmt_close($stmt);
 
@@ -51,12 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         if (mysqli_stmt_num_rows($stmt) > 0) {
-            $errors[] = '该邮箱已被注册。';
+            $errors[] = 'Email already registered.';
         }
         mysqli_stmt_close($stmt);
     }
 
-    // 创建用户
     if (empty($errors)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = mysqli_prepare($conn,
@@ -68,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $newId;
             $_SESSION['username'] = $username;
-            $_SESSION['flash'] = ['type' => 'success', 'message' => '注册成功，欢迎加入 PetConnect！'];
+            $_SESSION['flash'] = ['type' => 'success', 'message' => 'Registration successful! Welcome to PetConnect!'];
             header('Location: index.php');
             exit;
         } else {
-            $errors[] = '注册失败，请稍后重试。';
+            $errors[] = 'Registration failed. Please try again.';
         }
         mysqli_stmt_close($stmt);
     }
@@ -82,7 +76,7 @@ require_once 'includes/header.inc';
 require_once 'includes/nav.inc';
 ?>
 
-<h1 class="mb-4">注册</h1>
+<h1 class="mb-4">Register</h1>
 
 <div class="row">
     <div class="col-md-6 mx-auto">
@@ -98,42 +92,42 @@ require_once 'includes/nav.inc';
 
         <form method="post" action="">
             <div class="mb-3">
-                <label for="username" class="form-label">用户名 *</label>
+                <label for="username" class="form-label">Username *</label>
                 <input type="text" name="username" id="username" class="form-control"
                        value="<?= htmlspecialchars($old['username'] ?? '') ?>" required>
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">邮箱 *</label>
+                <label for="email" class="form-label">Email *</label>
                 <input type="email" name="email" id="email" class="form-control"
                        value="<?= htmlspecialchars($old['email'] ?? '') ?>" required>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">密码 *（至少 8 位）</label>
+                <label for="password" class="form-label">Password * (min. 8 characters)</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="password_confirm" class="form-label">确认密码 *</label>
+                <label for="password_confirm" class="form-label">Confirm Password *</label>
                 <input type="password" name="password_confirm" id="password_confirm" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="phone" class="form-label">电话</label>
+                <label for="phone" class="form-label">Phone</label>
                 <input type="text" name="phone" id="phone" class="form-control"
                        value="<?= htmlspecialchars($old['phone'] ?? '') ?>">
             </div>
 
             <div class="mb-3">
-                <label for="location" class="form-label">所在地</label>
+                <label for="location" class="form-label">Location</label>
                 <input type="text" name="location" id="location" class="form-control"
                        value="<?= htmlspecialchars($old['location'] ?? '') ?>">
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">注册</button>
-                <a href="login.php" class="btn btn-outline-light">已有账号？登录</a>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a href="login.php" class="btn btn-outline-light">Already have an account? Log in</a>
             </div>
         </form>
     </div>

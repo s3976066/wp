@@ -8,8 +8,8 @@ $pets = [];
 if ($searchTerm !== '') {
     $like = '%' . $searchTerm . '%';
     $stmt = mysqli_prepare($conn,
-        "SELECT * FROM pets WHERE name LIKE ? OR description LIKE ? ORDER BY created_at DESC");
-    mysqli_stmt_bind_param($stmt, 'ss', $like, $like);
+        "SELECT * FROM pets WHERE name LIKE ? OR description LIKE ? OR species LIKE ? ORDER BY created_at DESC");
+    mysqli_stmt_bind_param($stmt, 'sss', $like, $like, $like);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $pets = $result->fetch_all(MYSQLI_ASSOC);
@@ -20,17 +20,16 @@ require_once 'includes/header.inc';
 require_once 'includes/nav.inc';
 ?>
 
-<h1 class="mb-4">搜索宠物</h1>
+<h1 class="mb-4">Search Pets</h1>
 
-<!-- 搜索表单 -->
 <form method="get" action="search.php" class="mb-4">
     <div class="input-group input-group-lg">
         <input type="text" name="q" class="form-control"
-               placeholder="按名称或描述搜索..."
+               placeholder="Search by name, species, or description..."
                value="<?= htmlspecialchars($searchTerm) ?>"
-               aria-label="搜索宠物">
+               aria-label="Search pets">
         <button type="submit" class="btn btn-primary">
-            <span class="material-icons">search</span> 搜索
+            <span class="material-icons">search</span> Search
         </button>
     </div>
 </form>
@@ -38,16 +37,16 @@ require_once 'includes/nav.inc';
 <?php if ($searchTerm === ''): ?>
     <div class="text-center text-muted py-5">
         <span class="material-icons" style="font-size: 3rem;">pets</span>
-        <p class="mt-3">输入宠物名称或描述关键词开始搜索。</p>
+        <p class="mt-3">Enter a pet name, species (e.g. cat, dog, bird), or description keyword to begin searching.</p>
     </div>
 <?php elseif (empty($pets)): ?>
     <div class="text-center py-5">
-        <p>未找到匹配 "<strong><?= htmlspecialchars($searchTerm) ?></strong>" 的宠物。</p>
-        <p class="text-muted">请尝试其他关键词。</p>
+        <p>No pets found matching "<strong><?= htmlspecialchars($searchTerm) ?></strong>".</p>
+        <p class="text-muted">Try a different keyword.</p>
     </div>
 <?php else: ?>
     <p class="text-muted mb-3">
-        找到 <?= count($pets) ?> 条与 "<strong><?= htmlspecialchars($searchTerm) ?></strong>" 相关的结果
+        Found <?= count($pets) ?> result<?= count($pets) !== 1 ? 's' : '' ?> for "<strong><?= htmlspecialchars($searchTerm) ?></strong>"
     </p>
     <div class="row">
         <?php foreach ($pets as $pet): ?>
@@ -64,7 +63,7 @@ require_once 'includes/nav.inc';
                         </a>
                     </h5>
                     <p class="card-text text-muted"><?= htmlspecialchars($pet['species']) ?></p>
-                    <p class="card-text"><small><?= htmlspecialchars(mb_substr($pet['description'], 0, 100)) ?>…</small></p>
+                    <p class="card-text"><small><?= htmlspecialchars(substr($pet['description'], 0, 100)) ?>&hellip;</small></p>
                     <span class="badge badge-<?= strtolower($pet['status']) ?>"><?= htmlspecialchars($pet['status']) ?></span>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+<!-- PetConnect — shared navigation -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
