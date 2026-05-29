@@ -14,8 +14,8 @@
     --bg-dark: #0f172a;
     --bg-card: #1e293b;
     --bg-card-hover: #334155;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
+    --text: #ffffff;
+    --text-muted: #cbd5e1;
     --border: #334155;
 }
 
@@ -31,6 +31,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
 }
 
 h1, h2, h3, h4, h5, h6,
