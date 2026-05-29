@@ -93,6 +93,15 @@ a:hover {
     border-radius: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
+    color: var(--text);
+}
+
+.card-title,
+.card-text,
+.card-body p,
+.card-body small,
+.card-body .text-muted {
+    color: var(--text) !important;
 }
 
 .card:hover {
@@ -175,6 +184,16 @@ a:hover {
 
 .modal-footer {
     border-top: 1px solid var(--border);
+}
+
+/* ===== Tables ===== */
+.table {
+    color: var(--text);
+}
+
+.table th,
+.table td {
+    color: var(--text);
 }
 
 /* ===== Forms ===== */
