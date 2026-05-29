@@ -112,11 +112,11 @@ CREATE TABLE IF NOT EXISTS pets (
 
 | user_id | username | email | password (hash) | phone | location |
 |---------|----------|-------|-----------------|-------|----------|
-| 1 | sarah_animal_lover | sarah@example.com | $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi | 555-0101 | Melbourne, VIC |
-| 2 | john_foster | john@example.com | $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi | 555-0102 | Sydney, NSW |
-| 3 | emma_petcare | emma@example.com | $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi | 555-0103 | Brisbane, QLD |
-| 4 | mike_rescuer | mike@example.com | $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi | 555-0104 | Perth, WA |
-| 5 | lisa_shelter | lisa@example.com | $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi | 555-0105 | Adelaide, SA |
+| 1 | sarah_animal_lover | sarah@example.com | $2y$10$NRtTgVEm.IA.GXunqwaC5uuhGfQ84N0PoHfcAskhIaAd6LiLDXEk6 | 555-0101 | Melbourne, VIC |
+| 2 | john_foster | john@example.com | $2y$10$NRtTgVEm.IA.GXunqwaC5uuhGfQ84N0PoHfcAskhIaAd6LiLDXEk6 | 555-0102 | Sydney, NSW |
+| 3 | emma_petcare | emma@example.com | $2y$10$NRtTgVEm.IA.GXunqwaC5uuhGfQ84N0PoHfcAskhIaAd6LiLDXEk6 | 555-0103 | Brisbane, QLD |
+| 4 | mike_rescuer | mike@example.com | $2y$10$NRtTgVEm.IA.GXunqwaC5uuhGfQ84N0PoHfcAskhIaAd6LiLDXEk6 | 555-0104 | Perth, WA |
+| 5 | lisa_shelter | lisa@example.com | $2y$10$NRtTgVEm.IA.GXunqwaC5uuhGfQ84N0PoHfcAskhIaAd6LiLDXEk6 | 555-0105 | Adelaide, SA |
 
 ---
 
