@@ -189,6 +189,9 @@ a:hover {
 /* ===== Tables ===== */
 .table {
     color: var(--text);
+    --bs-table-bg: var(--bg-card);
+    --bs-table-color: var(--text);
+    --bs-table-border-color: var(--border);
 }
 
 .table th,
