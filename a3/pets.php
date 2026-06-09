@@ -2,30 +2,20 @@
 $pageTitle = 'Browse Pets';
 require_once 'includes/db_connect.inc';
 
-$stmt = mysqli_prepare($conn, "SELECT * FROM pets ORDER BY created_at DESC");
+$stmt = mysqli_prepare($conn,
+    "SELECT p.*, u.username AS owner_name FROM pets p
+     JOIN users u ON p.user_id = u.user_id
+     ORDER BY p.created_at DESC");
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $pets = $result->fetch_all(MYSQLI_ASSOC);
 mysqli_stmt_close($stmt);
 
-function formatAge($years, $months) {
-    $parts = [];
-    if ($years !== null && $years > 0) $parts[] = $years . ' yr';
-    if ($months !== null && $months > 0) $parts[] = $months . ' mo';
-    if (empty($parts)) return 'Under 1 month';
-    return implode(' ', $parts);
-}
-
 require_once 'includes/header.inc';
 require_once 'includes/nav.inc';
 ?>
 
-<div class="mb-5">
-    <img src="assets/images/pets_banner.jpg" alt="Pets Banner"
-         class="img-fluid rounded w-100" style="max-height: 300px; object-fit: cover;">
-</div>
-
-<h1 class="mb-4">Browse All Pets</h1>
+<h1 class="mb-4">All Available Pets</h1>
 
 <?php if (empty($pets)): ?>
     <div class="text-center py-5">
@@ -35,45 +25,46 @@ require_once 'includes/nav.inc';
     </div>
 <?php else: ?>
     <div class="row">
-        <?php foreach ($pets as $pet): ?>
-        <div class="col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <a href="details.php?id=<?= (int)$pet['pet_id'] ?>">
-                            <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                                 class="img-fluid rounded-start h-100 w-100"
-                                 style="object-fit: cover; min-height: 220px;"
-                                 alt="<?= htmlspecialchars($pet['name']) ?>">
-                        </a>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title">
+        <div class="col-md-5 col-lg-4 mb-4">
+            <img src="assets/images/pets_banner.jpg" alt="Pets Banner"
+                 class="img-fluid rounded w-100" style="object-fit: cover;">
+        </div>
+        <div class="col-md-7 col-lg-8 mb-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>SPECIES</th>
+                            <th>BREED</th>
+                            <th>SIZE</th>
+                            <th>FEE ($)</th>
+                            <th>OWNER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($pets as $pet): ?>
+                        <tr>
+                            <td>
                                 <a href="details.php?id=<?= (int)$pet['pet_id'] ?>">
                                     <?= htmlspecialchars($pet['name']) ?>
                                 </a>
-                            </h5>
-                            <p class="card-text mb-1"><strong>Species:</strong> <?= htmlspecialchars($pet['species']) ?></p>
-                            <?php if (!empty($pet['breed'])): ?>
-                            <p class="card-text mb-1"><strong>Breed:</strong> <?= htmlspecialchars($pet['breed']) ?></p>
-                            <?php endif; ?>
-                            <p class="card-text mb-1"><strong>Age:</strong> <?= formatAge($pet['age_years'], $pet['age_months']) ?></p>
-                            <p class="card-text mb-1"><strong>Gender:</strong> <?= htmlspecialchars($pet['gender']) ?></p>
-                            <p class="card-text mb-2">
-                                <strong>Size:</strong>
-                                <span class="badge bg-secondary"><?= htmlspecialchars($pet['size']) ?></span>
-                            </p>
-                            <p class="card-text mb-2">
-                                <span class="badge badge-<?= strtolower($pet['status']) ?>"><?= htmlspecialchars($pet['status']) ?></span>
-                            </p>
-                            <p class="card-text"><strong>Fee:</strong> $<?= number_format($pet['adoption_fee'], 2) ?></p>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                            <td><?= htmlspecialchars($pet['species']) ?></td>
+                            <td><?= htmlspecialchars($pet['breed'] ?? '—') ?></td>
+                            <td><?= htmlspecialchars($pet['size']) ?></td>
+                            <td><?= number_format($pet['adoption_fee'], 2) ?></td>
+                            <td>
+                                <a href="owner.php?user_id=<?= (int)$pet['user_id'] ?>">
+                                    <?= htmlspecialchars($pet['owner_name']) ?>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <?php endforeach; ?>
     </div>
 <?php endif; ?>
 
