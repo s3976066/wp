@@ -1,30 +1,25 @@
-SSLRequireSSL
-AuthName "Restricted Access"
-AuthType Kerberos
-Krb5Keytab  /etc/krb5.keytab
-KrbAuthRealms RMIT.INTERNAL
-KrbMethodNegotiate Off
-KrbMethodK5Passwd On
-KrbVerifyKDC off
-<RequireAny>
+Options -Indexes
 
+<FilesMatch "\.(inc)$">
+    Require all denied
+</FilesMatch>
 
-# Below, replace 's1234567' with your sID
-  
-  require user s3976066@RMIT.INTERNAL 
-  
-# ^^ If assignments allow more partners, add more 'require user' lines
+<FilesMatch "\.(sql|md|env)$">
+    Require all denied
+</FilesMatch>
 
-
-# Sometimes your network (eg work) blocks authentication ports, insert your ip address below to bypass authentication from a particular location and remove the '#' char from the start of the line.
-
-# require ip 93.184.216.34
-
-# ^^ If access from multiple locked down networks are required, add more 'require ip' lines.
-
-
-# Staff access below, do not modify!
-
-  require expr %{REMOTE_USER} =~ /^e\d+@RMIT\.INTERNAL$/
-
-</RequireAny>
+# Kerberos auth — only active on Coreteaching (mod_auth_kerb available)
+<IfModule auth_kerb_module>
+    SSLRequireSSL
+    AuthName "Restricted Access"
+    AuthType Kerberos
+    Krb5Keytab /etc/krb5.keytab
+    KrbAuthRealms RMIT.INTERNAL
+    KrbMethodNegotiate Off
+    KrbMethodK5Passwd On
+    KrbVerifyKDC off
+    <RequireAny>
+        require user s3976066@RMIT.INTERNAL
+        require expr %{REMOTE_USER} =~ /^e\d+@RMIT\.INTERNAL$/
+    </RequireAny>
+</IfModule>
