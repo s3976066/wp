@@ -74,20 +74,27 @@ function initGalleryModal() {
     });
 }
 
-// ===== 4. Species dropdown filter =====
+// ===== 4. Gallery filters (species + status) =====
 function initStatusFilter() {
-    const select = document.querySelector('#speciesFilter');
-    if (!select) return;
+    const speciesSelect = document.querySelector('#speciesFilter');
+    const statusSelect = document.querySelector('#statusFilter');
+    if (!speciesSelect && !statusSelect) return;
 
     const cards = document.querySelectorAll('.pet-card');
     if (cards.length === 0) return;
 
-    select.addEventListener('change', () => {
-        const val = select.value;
+    function applyFilters() {
+        const speciesVal = speciesSelect ? speciesSelect.value : 'all';
+        const statusVal = statusSelect ? statusSelect.value : 'all';
         cards.forEach(card => {
-            card.style.display = (val === 'all' || card.dataset.species === val) ? '' : 'none';
+            const matchSpecies = speciesVal === 'all' || card.dataset.species === speciesVal;
+            const matchStatus = statusVal === 'all' || card.dataset.status === statusVal;
+            card.style.display = (matchSpecies && matchStatus) ? '' : 'none';
         });
-    });
+    }
+
+    if (speciesSelect) speciesSelect.addEventListener('change', applyFilters);
+    if (statusSelect) statusSelect.addEventListener('change', applyFilters);
 }
 
 // ===== 5. Delete confirmation modal =====

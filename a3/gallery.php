@@ -14,16 +14,25 @@ require_once 'includes/nav.inc';
 
 <h1 class="mb-4">Pet Gallery</h1>
 
-<div class="mb-4">
-    <label for="speciesFilter" class="form-label">Filter by Species</label>
-    <select id="speciesFilter" class="form-select" style="max-width: 250px;">
-        <option value="all">Show All</option>
-        <option value="Dog">🐶 Dog</option>
-        <option value="Cat">🐱 Cat</option>
-        <option value="Bird">🐦 Bird</option>
-        <option value="Rabbit">🐰 Rabbit</option>
-        <option value="Other">🐾 Other</option>
-    </select>
+<div class="mb-4 d-flex gap-3 flex-wrap">
+    <div>
+        <label for="speciesFilter" class="form-label">Filter by Species</label>
+        <select id="speciesFilter" class="form-select" style="max-width: 200px;">
+            <option value="all">Show All</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Bird">Bird</option>
+        </select>
+    </div>
+    <div>
+        <label for="statusFilter" class="form-label">Filter by Status</label>
+        <select id="statusFilter" class="form-select" style="max-width: 200px;">
+            <option value="all">Show All</option>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
+        </select>
+    </div>
 </div>
 
 <?php if (empty($pets)): ?>
