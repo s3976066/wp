@@ -15,12 +15,14 @@ require_once 'includes/nav.inc';
 <h1 class="mb-4">Pet Gallery</h1>
 
 <div class="mb-4">
-    <label for="statusFilter" class="form-label">Filter by Status</label>
-    <select id="statusFilter" class="form-select" style="max-width: 250px;">
+    <label for="speciesFilter" class="form-label">Filter by Species</label>
+    <select id="speciesFilter" class="form-select" style="max-width: 250px;">
         <option value="all">Show All</option>
-        <option value="Available">Available</option>
-        <option value="Pending">Pending</option>
-        <option value="Adopted">Adopted</option>
+        <option value="Dog">🐶 Dog</option>
+        <option value="Cat">🐱 Cat</option>
+        <option value="Bird">🐦 Bird</option>
+        <option value="Rabbit">🐰 Rabbit</option>
+        <option value="Other">🐾 Other</option>
     </select>
 </div>
 
@@ -32,7 +34,7 @@ require_once 'includes/nav.inc';
 <?php else: ?>
     <div class="row" id="galleryGrid">
         <?php foreach ($pets as $pet): ?>
-        <div class="col-md-4 col-lg-3 mb-4 gallery-item pet-card" data-status="<?= htmlspecialchars($pet['status']) ?>">
+        <div class="col-md-4 col-lg-3 mb-4 gallery-item pet-card" data-species="<?= htmlspecialchars($pet['species']) ?>" data-status="<?= htmlspecialchars($pet['status']) ?>">
             <div class="card h-100">
                 <a href="details.php?id=<?= (int)$pet['pet_id'] ?>" class="img-hover gallery-img-link">
                     <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"

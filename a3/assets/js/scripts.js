@@ -74,9 +74,9 @@ function initGalleryModal() {
     });
 }
 
-// ===== 4. Status dropdown filter =====
+// ===== 4. Species dropdown filter =====
 function initStatusFilter() {
-    const select = document.querySelector('#statusFilter');
+    const select = document.querySelector('#speciesFilter');
     if (!select) return;
 
     const cards = document.querySelectorAll('.pet-card');
@@ -85,7 +85,7 @@ function initStatusFilter() {
     select.addEventListener('change', () => {
         const val = select.value;
         cards.forEach(card => {
-            card.style.display = (val === 'all' || card.dataset.status === val) ? '' : 'none';
+            card.style.display = (val === 'all' || card.dataset.species === val) ? '' : 'none';
         });
     });
 }
