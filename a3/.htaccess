@@ -1,5 +1,4 @@
-Options -Indexes
-
+# a3 — block direct access to include / data files
 <FilesMatch "\.(inc)$">
     Require all denied
 </FilesMatch>
@@ -7,19 +6,3 @@ Options -Indexes
 <FilesMatch "\.(sql|md|env)$">
     Require all denied
 </FilesMatch>
-
-# Kerberos auth — only active on Coreteaching (mod_auth_kerb available)
-<IfModule auth_kerb_module>
-    SSLRequireSSL
-    AuthName "Restricted Access"
-    AuthType Kerberos
-    Krb5Keytab /etc/krb5.keytab
-    KrbAuthRealms RMIT.INTERNAL
-    KrbMethodNegotiate Off
-    KrbMethodK5Passwd On
-    KrbVerifyKDC off
-    <RequireAny>
-        require user s3976066@RMIT.INTERNAL
-        require expr %{REMOTE_USER} =~ /^e\d+@RMIT\.INTERNAL$/
-    </RequireAny>
-</IfModule>

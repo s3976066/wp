@@ -13,7 +13,7 @@ if ($host === 'localhost' || $host === '127.0.0.1') {
     // ---- Local XAMPP ----
     $db_host = 'localhost';
     $db_user = 'root';
-    $db_pass = '';
+    $db_pass = 'zyz00311';
     $db_name = 'petconnect';
 } else {
     // ---- Jacob 5 (RMIT Coreteaching) ----
